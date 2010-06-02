@@ -1,0 +1,16 @@
+@type=Soul
+%div
+  %h2 Soul Details
+  %ul
+  %li
+    %label( for="Soul_name" ) name:
+      %span( id="Soul_name" )
+        = ViewData.Model.name
+  %li
+    %label( for="Soul_gravatar" ) gravatar:
+      %span( id="Soul_gravatar" )
+        = ViewData.Model.gravatar
+  %li
+    %label( for="Soul_point" ) point:
+      %span( id="Soul_point" )
+        = ViewData.Model.point

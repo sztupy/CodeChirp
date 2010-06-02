@@ -1,0 +1,39 @@
+@namespace=CodeChirp.Core
+@namespace=CodeChirp.Controllers
+@namespace=Shaml.Web.HtmlHelpers
+@type=List<Post>
+%div
+  %h2 Posts
+  - if (ViewContext.TempData["message"] != null)
+    %p= ViewContext.TempData["message"]
+  %table
+    %thead
+      %tr
+        %th= Html.SwitchOrderLink("type","type")
+        %th= Html.SwitchOrderLink("summary","summary")
+        %th= Html.SwitchOrderLink("body","body")
+        %th= Html.SwitchOrderLink("community","community")
+        %th= Html.SwitchOrderLink("score","score")
+        %th= Html.SwitchOrderLink("user","user")
+        %th= Html.SwitchOrderLink("lastactivity","lastactivity")
+        %th= Html.SwitchOrderLink("tags","tags")
+        %th( colspan=3 ) Action
+    %tbody
+      - foreach (Post Post in ViewData.Model)
+        %tr
+          %td= Post.type
+          %td= Post.summary
+          %td= Post.body
+          %td= Post.community
+          %td= Post.score
+          %td= Post.user
+          %td= Post.lastactivity
+          %td= Post.tags
+          %td
+            = Html.ActionLink("Details", "Show", "Posts", new { Id = Post.Id }, new { })
+          %td
+            = Html.ActionLink("Edit", "Edit", "Posts", new { Id = Post.Id }, new { })
+          %td
+            = Html.ActionLink("Delete", "Delete", "Posts", new { Id = Post.Id }, new { })
+  %p= Html.RenderPagination(ViewData["Pagination"] as PaginationData)
+  %p= Html.ActionLink("Create new Post", "Create", "Posts")

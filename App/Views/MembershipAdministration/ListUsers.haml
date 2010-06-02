@@ -1,0 +1,47 @@
+﻿@namespace=CodeChirp.ApplicationServices
+@namespace=CodeChirp.Controllers
+@namespace=System
+@namespace=System.Web.Security
+@namespace=System.Collections.Generic
+- var users = (ViewData["Users"] as List<MembershipUser>);
+%h2.MvcMembership
+  Membership Administration
+%fieldset.MvcMembership
+  %legend
+    Users
+  - if( users != null && users.Count > 0 )
+    %p
+      All of the application's users are listed below.
+      = Html.ActionLink( "Click here to create a new user.", "CreateUser" )
+    %ol
+      - foreach( var user in users )
+        %li
+          = Html.ActionLink(user.UserName, "UserDetails", "MembershipAdministration", new { id = int.Parse(user.ProviderUserKey.ToString()) }, new { } )
+  - else
+    %p
+      No users have been entered into the system yet.
+      = Html.ActionLink( "Create a new user.", "CreateUser" )
+%fieldset.MvcMembership
+  %legend
+    Roles
+  - if( (ViewData["Roles"] as List<String>).Count > 0 )
+    %ul
+      - foreach( string role in (ViewData["Roles"] as List<String>) )
+        %li
+          = Html.ActionLink(role,"Role","MembershipAdministration", new { id = role }, new { } )
+          (
+          = Html.ActionLink("Delete","DeleteRole","MembershipAdministration", new { id = role }, new { })
+          )
+  - else
+    %div
+      No roles have been added to the system yet.
+- using( Html.BeginForm( "CreateRole", "MembershipAdministration" ) )
+  %fieldset.MvcMembership
+    %legend
+      Create Role
+    %div
+      %label( for="role" )
+        Role
+      = Html.TextBox( "role" )
+    %div
+      %input( type="submit" name="submitAddRole" value="Add Role" )

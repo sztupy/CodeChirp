@@ -1,0 +1,25 @@
+﻿@namespace=CodeChirp.Controllers
+@namespace=CodeChirp.ApplicationServices
+@namespace=System.Web.Security
+%h2.MvcMembership
+  Users In "
+  = ( ViewData["Role"] as MembershipRoleViewData ).Name
+  " Role
+%h3.MvcMembership
+  = Html.ActionLink("<< Return to Membership Administration","Index","MembershipAdministration")
+%fieldset.MvcMembership
+  %legend
+    Users In "
+    = ( ViewData["Role"] as MembershipRoleViewData ).Name
+    " Role
+  - if( ( ViewData["Role"] as MembershipRoleViewData ).Users.Count > 0 )
+    %ol
+      - foreach( MembershipUser user in ( ViewData["Role"] as MembershipRoleViewData ).Users )
+        %li
+          = Html.ActionLink(user.UserName,"UserDetails","MembershipAdministration", new { Id = int.Parse(user.ProviderUserKey.ToString()) }, new { } )
+          (
+          = Html.ActionLink("Remove", "RemoveUserFromRole", "MembershipAdministration", new { userId = int.Parse(user.ProviderUserKey.ToString()), roleName = ( ViewData["Role"] as MembershipRoleViewData ).Name } , new { })
+          )
+  - else
+    %div
+      No users have been added to this role yet.

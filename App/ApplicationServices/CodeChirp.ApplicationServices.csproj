@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets='Build' ToolsVersion='3.5' xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+  <PropertyGroup>
+    <Configuration Condition=' &apos;$(Configuration)&apos; == &apos;&apos; '>Debug</Configuration>
+    <Platform Condition=' &apos;$(Platform)&apos; == &apos;&apos; '>AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CE3802D9-1E17-47AB-ACEF-999F0DD685CA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CodeChirp.ApplicationServices</RootNamespace>
+    <AssemblyName>CodeChirp.ApplicationServices</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=' &apos;$(Configuration)|$(Platform)&apos; == &apos;Debug|AnyCPU&apos; '>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=' &apos;$(Configuration)|$(Platform)&apos; == &apos;Release|AnyCPU&apos; '>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include='DotNetOpenAuth, Version=3.2.0.9171, Culture=neutral, processorArchitecture=MSIL'>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libraries\DotNetOpenAuth.dll</HintPath>
+    </Reference>
+    <Reference Include='Shaml.Membership'>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libraries\Shaml.Membership.dll</HintPath>
+    </Reference>
+    <Reference Include='System'/>
+    <Reference Include='System.configuration'/>
+    <Reference Include='System.Core'>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include='System.Web'/>
+    <Reference Include='System.Web.Abstractions'>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include='System.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL'>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libraries\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include='System.Web.Routing'>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include='System.Xml.Linq'>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include='System.Data.DataSetExtensions'>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include='System.Data'/>
+    <Reference Include='System.Xml'/>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include='..\..\Config\CommonAssemblyInfo.cs'>
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include='MembershipAdministrationController_Base.cs'/>
+    <Compile Include='OpenIDController_Base.cs'/>
+    <Compile Include='Properties\AssemblyInfo.cs'/>
+  </ItemGroup>
+  <Import Project='$(MSBuildToolsPath)\Microsoft.CSharp.targets'/>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

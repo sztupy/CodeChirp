@@ -1,0 +1,27 @@
+@namespace=CodeChirp.Controllers
+@type=CodeChirp.Controllers.SoulsController.SoulFormViewModel
+= Html.ValidationSummary()
+- Html.EnableClientValidation();
+- using (Html.BeginForm()) 
+  = Html.AntiForgeryToken()
+  = Html.Hidden("Soul.Id", (Model.Soul != null) ? Model.Soul.Id : 0)
+  %ul
+    %li
+      = Html.LabelFor( x => x.Soul.name )
+      %div
+        = Html.TextBoxFor( x => x.Soul.name )
+        = Html.ValidationMessageFor( x => x.Soul.name )
+    %li
+      = Html.LabelFor( x => x.Soul.gravatar )
+      %div
+        = Html.TextBoxFor( x => x.Soul.gravatar )
+        = Html.ValidationMessageFor( x => x.Soul.gravatar )
+    %li
+      = Html.LabelFor( x => x.Soul.point )
+      %div
+        = Html.TextBoxFor( x => x.Soul.point )
+        = Html.ValidationMessageFor( x => x.Soul.point )
+    %li
+      %input( type="submit" name="btnSave" value="Save Soul")/
+      %button( name="btnCancel" onClick="window.location.href = '/Souls';") Cancel
+

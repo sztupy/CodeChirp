@@ -1,0 +1,20 @@
+using LinFu.IoC;
+using Shaml.Core.CommonValidator;
+using Shaml.Core.NHibernateValidator.CommonValidatorAdapter;
+using CommonServiceLocator.LinFuAdapter;
+using Microsoft.Practices.ServiceLocation;
+using Shaml.Core.PersistenceSupport;
+using Tests.CodeChirp.Data.TestDoubles;
+
+namespace Tests
+{
+    public class ServiceLocatorInitializer
+    {
+        public static void Init() {
+            ServiceContainer container = new ServiceContainer();
+            container.AddService(typeof(IValidator), typeof(Validator));
+            container.AddService(typeof(IEntityDuplicateChecker), typeof(EntityDuplicateCheckerStub));
+            ServiceLocator.SetLocatorProvider(() => new LinFuServiceLocator(container));
+        }
+    }
+}

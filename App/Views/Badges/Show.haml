@@ -1,0 +1,20 @@
+@type=Badge
+%div
+  %h2 Badge Details
+  %ul
+  %li
+    %label( for="Badge_name" ) name:
+      %span( id="Badge_name" )
+        = ViewData.Model.name
+  %li
+    %label( for="Badge_count" ) count:
+      %span( id="Badge_count" )
+        = ViewData.Model.count
+  %li
+    %label( for="Badge_rank" ) rank:
+      %span( id="Badge_rank" )
+        = ViewData.Model.rank
+  %li
+    %label( for="Badge_description" ) description:
+      %span( id="Badge_description" )
+        = ViewData.Model.description
