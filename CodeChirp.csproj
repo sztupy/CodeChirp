@@ -1,7 +1,7 @@
-﻿<Project DefaultTargets='Build' ToolsVersion='3.5' xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=' &apos;$(Configuration)&apos; == &apos;&apos; '>Debug</Configuration>
-    <Platform Condition=' &apos;$(Platform)&apos; == &apos;&apos; '>AnyCPU</Platform>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{08CB48AF-5AB7-4D74-ADEA-C69512C29858}</ProjectGuid>
@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
   </PropertyGroup>
-  <PropertyGroup Condition=' &apos;$(Configuration)|$(Platform)&apos; == &apos;Debug|AnyCPU&apos; '>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,7 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=' &apos;$(Configuration)|$(Platform)&apos; == &apos;Release|AnyCPU&apos; '>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
@@ -31,220 +31,232 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include='CommonServiceLocator.LinFuAdapter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL'>
+    <Reference Include="CommonServiceLocator.LinFuAdapter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\CommonServiceLocator.LinFuAdapter.dll</HintPath>
     </Reference>
-    <Reference Include='FluentNHibernate, Version=1.0.0.593, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL'>
+    <Reference Include="FluentNHibernate, Version=1.0.0.593, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include='LinFu.Core, Version=2.2.0.19938, Culture=neutral, PublicKeyToken=a4c63a184389506f, processorArchitecture=MSIL'>
+    <Reference Include="LinFu.Core, Version=2.2.0.19938, Culture=neutral, PublicKeyToken=a4c63a184389506f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\LinFu.Core.dll</HintPath>
     </Reference>
-    <Reference Include='log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL'>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\log4net.dll</HintPath>
     </Reference>
-    <Reference Include='Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL'>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include='MvcContrib, Version=1.0.0.947, Culture=neutral, processorArchitecture=MSIL'>
+    <Reference Include="MvcContrib, Version=1.0.0.947, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\MvcContrib.dll</HintPath>
     </Reference>
-    <Reference Include='NHaml.Web.Mvc, Version=1.5.0.2, Culture=neutral, processorArchitecture=MSIL'>
+    <Reference Include="NHaml.Web.Mvc, Version=1.5.0.2, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\NHaml.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include='NHibernate, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL'>
+    <Reference Include="NHibernate, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include='NHibernate.ByteCode.LinFu, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL'>
+    <Reference Include="NHibernate.ByteCode.LinFu, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\NHibernate.ByteCode.LinFu.dll</HintPath>
     </Reference>
-    <Reference Include='NHibernate.Validator, Version=1.2.0.2001, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL'>
+    <Reference Include="NHibernate.Validator, Version=1.2.0.2001, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\NHibernate.Validator.dll</HintPath>
     </Reference>
-    <Reference Include='Shaml.Core'>
+    <Reference Include="Shaml.Core">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\Shaml.Core.dll</HintPath>
     </Reference>
-    <Reference Include='Shaml.Core.Validator'>
+    <Reference Include="Shaml.Core.Validator">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\Shaml.Core.Validator.dll</HintPath>
     </Reference>
-    <Reference Include='Shaml.Data'>
+    <Reference Include="Shaml.Data">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\Shaml.Data.dll</HintPath>
     </Reference>
-    <Reference Include='Shaml.Web'>
+    <Reference Include="Shaml.Web">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\Shaml.Web.dll</HintPath>
     </Reference>
-    <Reference Include='System'/>
-    <Reference Include='System.Data'/>
-    <Reference Include='System.Core'>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include='System.Data.DataSetExtensions'>
+    <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include='System.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL'>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libraries\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include='System.Xml.Linq'>
+    <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include='System.Drawing'/>
-    <Reference Include='System.Web'>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web">
       <Private>False</Private>
     </Reference>
-    <Reference Include='System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL'>
+    <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
-    <Reference Include='System.Web.Abstractions'>
+    <Reference Include="System.Web.Abstractions">
       <Private>True</Private>
     </Reference>
-    <Reference Include='System.Web.Routing'>
+    <Reference Include="System.Web.Routing">
       <Private>False</Private>
     </Reference>
-    <Reference Include='System.Xml'/>
-    <Reference Include='System.Configuration'/>
-    <Reference Include='System.Web.Services'>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services">
       <Private>False</Private>
     </Reference>
-    <Reference Include='System.EnterpriseServices'/>
+    <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include='Config\CommonAssemblyInfo.cs'/>
-    <Compile Include='Config\Default.aspx.cs'>
+    <Compile Include="Config\CommonAssemblyInfo.cs" />
+    <Compile Include="Config\Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include='Config\Global.asax.cs'/>
-    <Compile Include='Config\AssemblyInfo.cs'/>
+    <Compile Include="Config\Global.asax.cs" />
+    <Compile Include="Config\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include='Default.aspx'/>
-    <Content Include='Global.asax'/>
-    <Content Include='Web.config'/>
-  <Content Include='App\Views\Souls\_SoulForm.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Souls\Create.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Souls\Delete.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Souls\Edit.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Souls\Index.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Souls\Show.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Badges\_BadgeForm.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Badges\Create.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Badges\Delete.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Badges\Edit.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Badges\Index.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Badges\Show.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Tags\_TagForm.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Tags\Create.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Tags\Delete.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Tags\Edit.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Tags\Index.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Tags\Show.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Posts\_PostForm.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Posts\Create.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Posts\Delete.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Posts\Edit.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Posts\Index.haml'><SubType>ASPXCodeBehind</SubType></Content><Content Include='App\Views\Posts\Show.haml'><SubType>ASPXCodeBehind</SubType></Content></ItemGroup>
-  <ItemGroup>
-    <Content Include='App\Views\Account\ChangePassword.haml'>
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
+    <Content Include="App\Views\Souls\Index.haml">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include='App\Views\Account\ChangePasswordSuccess.haml'>
+    <Content Include="App\Views\Souls\Show.haml">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include='App\Views\Account\LogOn.haml'>
+    <Content Include="App\Views\Badges\Index.haml">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include='App\Views\Account\Register.haml'>
+    <Content Include="App\Views\Badges\Show.haml">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include='App\Views\Home\Index.haml'>
+    <Content Include="App\Views\Tags\Index.haml">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include='App\Views\MembershipAdministration\CreateUser.haml'>
+    <Content Include="App\Views\Tags\Show.haml">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include='App\Views\MembershipAdministration\DisplayUser.haml'>
+    <Content Include="App\Views\Posts\Index.haml">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include='App\Views\MembershipAdministration\ListUsers.haml'>
+    <Content Include="App\Views\Posts\Show.haml">
       <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include='App\Views\MembershipAdministration\ResetPassword.haml'>
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include='App\Views\MembershipAdministration\UsersInRole.haml'>
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include='App\Views\OpenId\Index.haml'>
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include='App\Views\OpenId\Login.haml'>
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include='App\Views\OpenId\XRDS.haml'>
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include='App\Views\Shared\Application.haml'>
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include='App\Views\Shared\Empty.haml'>
-    </Content>
-    <Content Include='App\Views\Shared\Error.haml'>
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include='App\Views\Shared\_Footer.haml'>
-    </Content>
-    <Content Include='App\Views\Shared\_LogOnUserControl.haml'>
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include='App\Views\Shared\_MainMenu.haml'>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include='App\ApplicationServices\CodeChirp.ApplicationServices.csproj'>
+    <Content Include="App\Views\Account\ChangePassword.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Account\ChangePasswordSuccess.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Account\LogOn.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Account\Register.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Home\Index.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\MembershipAdministration\CreateUser.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\MembershipAdministration\DisplayUser.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\MembershipAdministration\ListUsers.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\MembershipAdministration\ResetPassword.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\MembershipAdministration\UsersInRole.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\OpenId\Index.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\OpenId\Login.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\OpenId\XRDS.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Shared\Application.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Shared\Empty.haml">
+    </Content>
+    <Content Include="App\Views\Shared\Error.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Shared\_Footer.haml">
+    </Content>
+    <Content Include="App\Views\Shared\_LogOnUserControl.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Shared\_MainMenu.haml">
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="App\ApplicationServices\CodeChirp.ApplicationServices.csproj">
       <Project>{CE3802D9-1E17-47AB-ACEF-999F0DD685CA}</Project>
       <Name>CodeChirp.ApplicationServices</Name>
     </ProjectReference>
-    <ProjectReference Include='App\Controllers\CodeChirp.Controllers.csproj'>
+    <ProjectReference Include="App\Controllers\CodeChirp.Controllers.csproj">
       <Project>{141586BA-02E8-4562-9847-FEB5B6B71943}</Project>
       <Name>CodeChirp.Controllers</Name>
     </ProjectReference>
-    <ProjectReference Include='App\Core\CodeChirp.Core.csproj'>
+    <ProjectReference Include="App\Core\CodeChirp.Core.csproj">
       <Project>{E7B9DBBF-74D5-4A30-B497-13B7C441FABC}</Project>
       <Name>CodeChirp.Core</Name>
     </ProjectReference>
-    <ProjectReference Include='App\Data\CodeChirp.Data.csproj'>
+    <ProjectReference Include="App\Data\CodeChirp.Data.csproj">
       <Project>{33500762-1B80-4AC3-88AF-029A1043AF71}</Project>
       <Name>CodeChirp.Data</Name>
     </ProjectReference>
-    <ProjectReference Include='Config\CodeChirp.Config.csproj'>
+    <ProjectReference Include="Config\CodeChirp.Config.csproj">
       <Project>{BA8EDD55-7CE5-422C-985C-96B4A3C9A809}</Project>
       <Name>CodeChirp.Config</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include='App\Stylesheets\ie.sass'/>
-    <None Include='App\Stylesheets\print.sass'/>
-    <None Include='App\Stylesheets\screen.sass'/>
-    <Content Include='App\Views\Home\Index.aspx'/>
-    <Content Include='App\Views\Shared\Site.master'/>
-    
-    
-    
-    
-    
-    
-    <Content Include='App\Views\Web.config'/>
-    
-    
-    
-    
-    
-    
+    <None Include="App\Stylesheets\ie.sass" />
+    <None Include="App\Stylesheets\print.sass" />
+    <None Include="App\Stylesheets\screen.sass" />
+    <Content Include="App\Views\Home\Index.aspx" />
+    <Content Include="App\Views\Shared\Site.master" />
+    <Content Include="App\Views\Web.config" />
   </ItemGroup>
-  <Import Project='$(MSBuildBinPath)\Microsoft.CSharp.targets'/>
-  <Import Project='$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets'/>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target> -->
-  <Target Name='AfterBuild' Condition='&apos;$(MvcBuildViews)&apos;==&apos;true&apos;'>
-    <AspNetCompiler VirtualPath='temp' PhysicalPath='$(ProjectDir)\..\$(ProjectName)'/>
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
   </Target>
   <ProjectExtensions>
     <VisualStudio>
-      <FlavorProperties GUID='{349c5851-65df-11da-9384-00065b846f21}'>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
