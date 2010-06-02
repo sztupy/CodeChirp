@@ -46,61 +46,6 @@ namespace Tests.Blog.Web.Controllers
             (result.ViewData.Model as Soul).Id.ShouldEqual(1);
         }
 
-        [Test]
-        public void CanInitSoulCreation() {
-            ViewResult result = controller.Create().AssertViewRendered();
-            
-            result.ViewData.Model.ShouldNotBeNull();
-            result.ViewData.Model.ShouldBeOfType(typeof(SoulsController.SoulFormViewModel));
-            (result.ViewData.Model as SoulsController.SoulFormViewModel).Soul.ShouldBeNull();
-        }
-
-        [Test]
-        public void CanEnsureSoulCreationIsValid() {
-            Soul SoulFromForm = new Soul();
-            ViewResult result = controller.Create(SoulFromForm).AssertViewRendered();
-
-            result.ViewData.Model.ShouldNotBeNull();
-            result.ViewData.Model.ShouldBeOfType(typeof(SoulsController.SoulFormViewModel));
-        }
-
-        [Test]
-        public void CanCreateSoul() {
-            Soul SoulFromForm = CreateTransientSoul();
-            RedirectToRouteResult redirectResult = controller.Create(SoulFromForm)
-                .AssertActionRedirect().ToAction("Index");
-            controller.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()].ToString()
-				.ShouldContain("was successfully created");
-        }
-
-        [Test]
-        public void CanUpdateSoul() {
-            Soul SoulFromForm = CreateTransientSoul();
-            EntityIdSetter.SetIdOf<int>(SoulFromForm, 1);
-            RedirectToRouteResult redirectResult = controller.Edit(SoulFromForm)
-                .AssertActionRedirect().ToAction("Index");
-            controller.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()].ToString()
-				.ShouldContain("was successfully updated");
-        }
-
-        [Test]
-        public void CanInitSoulEdit() {
-            ViewResult result = controller.Edit(1).AssertViewRendered();
-
-			result.ViewData.Model.ShouldNotBeNull();
-            result.ViewData.Model.ShouldBeOfType(typeof(SoulsController.SoulFormViewModel));
-            (result.ViewData.Model as SoulsController.SoulFormViewModel).Soul.Id.ShouldEqual(1);
-        }
-
-        [Test]
-        public void CanDeleteSoul() {
-            RedirectToRouteResult redirectResult = controller.DeleteConfirmed(1)
-                .AssertActionRedirect().ToAction("Index");
-            
-            controller.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()].ToString()
-				.ShouldContain("was successfully deleted");
-        }
-
 		#region Create Mock Soul Repository
 
         private INHibernateQueryRepository<Soul> CreateMockSoulRepository() {

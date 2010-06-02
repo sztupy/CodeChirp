@@ -47,61 +47,6 @@ namespace Tests.Blog.Web.Controllers
             (result.ViewData.Model as Post).Id.ShouldEqual(1);
         }
 
-        [Test]
-        public void CanInitPostCreation() {
-            ViewResult result = controller.Create().AssertViewRendered();
-            
-            result.ViewData.Model.ShouldNotBeNull();
-            result.ViewData.Model.ShouldBeOfType(typeof(PostsController.PostFormViewModel));
-            (result.ViewData.Model as PostsController.PostFormViewModel).Post.ShouldBeNull();
-        }
-
-        [Test]
-        public void CanEnsurePostCreationIsValid() {
-            Post PostFromForm = new Post();
-            ViewResult result = controller.Create(PostFromForm).AssertViewRendered();
-
-            result.ViewData.Model.ShouldNotBeNull();
-            result.ViewData.Model.ShouldBeOfType(typeof(PostsController.PostFormViewModel));
-        }
-
-        [Test]
-        public void CanCreatePost() {
-            Post PostFromForm = CreateTransientPost();
-            RedirectToRouteResult redirectResult = controller.Create(PostFromForm)
-                .AssertActionRedirect().ToAction("Index");
-            controller.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()].ToString()
-				.ShouldContain("was successfully created");
-        }
-
-        [Test]
-        public void CanUpdatePost() {
-            Post PostFromForm = CreateTransientPost();
-            EntityIdSetter.SetIdOf<int>(PostFromForm, 1);
-            RedirectToRouteResult redirectResult = controller.Edit(PostFromForm)
-                .AssertActionRedirect().ToAction("Index");
-            controller.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()].ToString()
-				.ShouldContain("was successfully updated");
-        }
-
-        [Test]
-        public void CanInitPostEdit() {
-            ViewResult result = controller.Edit(1).AssertViewRendered();
-
-			result.ViewData.Model.ShouldNotBeNull();
-            result.ViewData.Model.ShouldBeOfType(typeof(PostsController.PostFormViewModel));
-            (result.ViewData.Model as PostsController.PostFormViewModel).Post.Id.ShouldEqual(1);
-        }
-
-        [Test]
-        public void CanDeletePost() {
-            RedirectToRouteResult redirectResult = controller.DeleteConfirmed(1)
-                .AssertActionRedirect().ToAction("Index");
-            
-            controller.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()].ToString()
-				.ShouldContain("was successfully deleted");
-        }
-
 		#region Create Mock Post Repository
 
         private INHibernateQueryRepository<Post> CreateMockPostRepository() {

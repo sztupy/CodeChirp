@@ -46,61 +46,6 @@ namespace Tests.Blog.Web.Controllers
             (result.ViewData.Model as Tag).Id.ShouldEqual(1);
         }
 
-        [Test]
-        public void CanInitTagCreation() {
-            ViewResult result = controller.Create().AssertViewRendered();
-            
-            result.ViewData.Model.ShouldNotBeNull();
-            result.ViewData.Model.ShouldBeOfType(typeof(TagsController.TagFormViewModel));
-            (result.ViewData.Model as TagsController.TagFormViewModel).Tag.ShouldBeNull();
-        }
-
-        [Test]
-        public void CanEnsureTagCreationIsValid() {
-            Tag TagFromForm = new Tag();
-            ViewResult result = controller.Create(TagFromForm).AssertViewRendered();
-
-            result.ViewData.Model.ShouldNotBeNull();
-            result.ViewData.Model.ShouldBeOfType(typeof(TagsController.TagFormViewModel));
-        }
-
-        [Test]
-        public void CanCreateTag() {
-            Tag TagFromForm = CreateTransientTag();
-            RedirectToRouteResult redirectResult = controller.Create(TagFromForm)
-                .AssertActionRedirect().ToAction("Index");
-            controller.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()].ToString()
-				.ShouldContain("was successfully created");
-        }
-
-        [Test]
-        public void CanUpdateTag() {
-            Tag TagFromForm = CreateTransientTag();
-            EntityIdSetter.SetIdOf<int>(TagFromForm, 1);
-            RedirectToRouteResult redirectResult = controller.Edit(TagFromForm)
-                .AssertActionRedirect().ToAction("Index");
-            controller.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()].ToString()
-				.ShouldContain("was successfully updated");
-        }
-
-        [Test]
-        public void CanInitTagEdit() {
-            ViewResult result = controller.Edit(1).AssertViewRendered();
-
-			result.ViewData.Model.ShouldNotBeNull();
-            result.ViewData.Model.ShouldBeOfType(typeof(TagsController.TagFormViewModel));
-            (result.ViewData.Model as TagsController.TagFormViewModel).Tag.Id.ShouldEqual(1);
-        }
-
-        [Test]
-        public void CanDeleteTag() {
-            RedirectToRouteResult redirectResult = controller.DeleteConfirmed(1)
-                .AssertActionRedirect().ToAction("Index");
-            
-            controller.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()].ToString()
-				.ShouldContain("was successfully deleted");
-        }
-
 		#region Create Mock Tag Repository
 
         private INHibernateQueryRepository<Tag> CreateMockTagRepository() {
