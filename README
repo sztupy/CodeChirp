@@ -1,0 +1,9 @@
+== CodeChirp ==
+
+Twitter-like SO-trilogy comments/questions/answers aggregator.
+
+Built for the SO-trilogy API contest.
+
+Uses S#aml Architecture. Build and run using `shaml`
+
+Licence: AGPLv3
