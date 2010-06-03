@@ -14,10 +14,9 @@ namespace CodeChirp.Data.Mapping
    {
        public void Override(AutoMapping<Badge> mapping)
        {
-         // mapping.Map(x => x.name).CustomType("StringClob").CustomSqlType("text");
-         // mapping.Map(x => x.count).CustomType("StringClob").CustomSqlType("text");
-         // mapping.Map(x => x.rank).CustomType("StringClob").CustomSqlType("text");
-         // mapping.Map(x => x.description).CustomType("StringClob").CustomSqlType("text");
+            mapping.Map(x => x.description).CustomType("StringClob").CustomSqlType("text");
+            mapping.Map(x => x.sitename).Index("badge_site_name_index");
+            mapping.Map(x => x.siteid).Index("badge_site_id_index");        
        }
    }
 }

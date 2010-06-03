@@ -1,144 +1,188 @@
 
-    drop table if exists WebSamples cascade;
+    drop table if exists Souls;
 
-    drop table if exists Sessions cascade;
+    drop table if exists Posts;
 
-    drop table if exists Roles cascade;
+    drop table if exists Posts_Tags;
 
-    drop table if exists Roles_Users cascade;
+    drop table if exists Tags;
 
-    drop table if exists Users cascade;
+    drop table if exists Badges;
 
-    drop table if exists OpenIdAlternatives cascade;
+    drop table if exists StaticDatas;
 
-    drop table if exists ProfileDatas cascade;
+    drop table if exists Sessions;
 
-    drop table if exists Profiles cascade;
+    drop table if exists Roles;
 
-    drop table if exists hibernate_unique_key cascade;
+    drop table if exists Roles_Users;
 
-    create table WebSamples (
-        Id int4 not null,
-       Property varchar(255),
+    drop table if exists Users;
+
+    drop table if exists OpenIdAlternatives;
+
+    drop table if exists ProfileDatas;
+
+    drop table if exists Profiles;
+
+    drop table if exists hibernate_unique_key;
+
+    create table Souls (
+        Id INTEGER not null,
+       sitename INTEGER,
+       siteid INTEGER,
+       name TEXT,
+       gravatar TEXT,
+       point INTEGER,
+       primary key (Id)
+    );
+
+    create table Posts (
+        Id INTEGER not null,
+       body text,
+       sitename INTEGER,
+       siteid INTEGER,
+       type INTEGER,
+       summary TEXT,
+       community INTEGER,
+       score INTEGER,
+       lastedit DATETIME,
+       lastactivity DATETIME,
+       userFk INTEGER,
+       parentFk INTEGER,
+       primary key (Id)
+    );
+
+    create table Posts_Tags (
+        PostFk INTEGER not null,
+       TagFk INTEGER not null,
+       primary key (PostFk, TagFk)
+    );
+
+    create table Tags (
+        Id INTEGER not null,
+       site INTEGER,
+       name TEXT,
+       primary key (Id)
+    );
+
+    create table Badges (
+        Id INTEGER not null,
+       description text,
+       sitename INTEGER,
+       siteid INTEGER,
+       name TEXT,
+       count INTEGER,
+       rank INTEGER,
+       primary key (Id)
+    );
+
+    create table StaticDatas (
+        Id INTEGER not null,
+       lastmodifieddate DATETIME,
        primary key (Id)
     );
 
     create table Sessions (
-        Id int4 not null,
+        Id INTEGER not null,
        Data text,
-       SessionId varchar(255),
-       ApplicationName varchar(255),
-       Created timestamp,
-       Expires timestamp,
-       Timeout int4,
-       Locked boolean,
-       LockId int4,
-       LockDate timestamp,
-       Flags int4,
+       SessionId TEXT,
+       ApplicationName TEXT,
+       Created DATETIME,
+       Expires DATETIME,
+       Timeout INTEGER,
+       Locked INTEGER,
+       LockId INTEGER,
+       LockDate DATETIME,
+       Flags INTEGER,
        primary key (Id),
       unique (SessionId)
     );
 
     create table Roles (
-        Id int4 not null,
-       Name varchar(255),
-       ApplicationName varchar(255),
+        Id INTEGER not null,
+       Name TEXT,
+       ApplicationName TEXT,
        primary key (Id),
       unique (Name, ApplicationName)
     );
 
     create table Roles_Users (
-        RoleFk int4 not null,
-       UserFk int4 not null,
+        RoleFk INTEGER not null,
+       UserFk INTEGER not null,
        primary key (UserFk, RoleFk)
     );
 
     create table Users (
-        Id int4 not null,
-       Username varchar(255),
-       ApplicationName varchar(255),
-       Email varchar(255),
-       IsLockedOut boolean,
-       Comment varchar(255),
-       Password varchar(255),
-       PasswordQuestion varchar(255),
-       PasswordAnswer varchar(255),
-       IsApproved boolean,
-       LastActivityDate timestamp,
-       LastLoginDate timestamp,
-       LastPasswordChangedDate timestamp,
-       CreationDate timestamp,
-       IsOnline boolean,
-       LastLockedOutDate timestamp,
-       FailedPasswordAttemptCount int4,
-       FailedPasswordAttemptWindowStart timestamp,
-       FailedPasswordAnswerAttemptCount int4,
-       FailedPasswordAnswerAttemptWindowStart timestamp,
-       UserProfileFk int4,
+        Id INTEGER not null,
+       Username TEXT,
+       ApplicationName TEXT,
+       Email TEXT,
+       IsLockedOut INTEGER,
+       Comment TEXT,
+       Password TEXT,
+       PasswordQuestion TEXT,
+       PasswordAnswer TEXT,
+       IsApproved INTEGER,
+       LastActivityDate DATETIME,
+       LastLoginDate DATETIME,
+       LastPasswordChangedDate DATETIME,
+       CreationDate DATETIME,
+       IsOnline INTEGER,
+       LastLockedOutDate DATETIME,
+       FailedPasswordAttemptCount INTEGER,
+       FailedPasswordAttemptWindowStart DATETIME,
+       FailedPasswordAnswerAttemptCount INTEGER,
+       FailedPasswordAnswerAttemptWindowStart DATETIME,
+       UserProfileFk INTEGER,
        primary key (Id),
       unique (Username, ApplicationName)
     );
 
     create table OpenIdAlternatives (
-        User_id int4 not null,
-       Value varchar(255)
+        User_id INTEGER not null,
+       Value TEXT
     );
 
     create table ProfileDatas (
-        Id int4 not null,
+        Id INTEGER not null,
        ValueString text,
-       Name varchar(255),
-       ValueBinary bytea,
-       ProfileFk int4,
+       Name TEXT,
+       ValueBinary BLOB,
+       ProfileFk INTEGER,
        primary key (Id)
     );
 
     create table Profiles (
-        Id int4 not null,
-       ApplicationName varchar(255),
-       IsAnonymous boolean,
-       LastActivityDate timestamp,
-       LastUpdatedDate timestamp,
-       UserFk int4,
+        Id INTEGER not null,
+       ApplicationName TEXT,
+       IsAnonymous INTEGER,
+       LastActivityDate DATETIME,
+       LastUpdatedDate DATETIME,
+       UserFk INTEGER,
        primary key (Id)
     );
 
-    alter table Roles_Users 
-        add constraint FKE25CEFA09DCE619A 
-        foreign key (UserFk) 
-        references Users;
+    create index soul_site_name_index on Souls (sitename);
 
-    alter table Roles_Users 
-        add constraint FKE25CEFA0F508E278 
-        foreign key (RoleFk) 
-        references Roles;
+    create index soul_site_id_index on Souls (siteid);
+
+    create index post_site_name_index on Posts (sitename);
+
+    create index post_site_id_index on Posts (siteid);
+
+    create index tag_site_name_index on Tags (site);
+
+    create index badge_site_name_index on Badges (sitename);
+
+    create index badge_site_id_index on Badges (siteid);
 
     create index users_email_index on Users (Email);
 
     create index users_islockedout_index on Users (IsLockedOut);
 
-    alter table Users 
-        add constraint FK617D3C3A298905ED 
-        foreign key (UserProfileFk) 
-        references Profiles;
-
-    alter table OpenIdAlternatives 
-        add constraint FK9074A596BF38FCB 
-        foreign key (User_id) 
-        references Users;
-
-    alter table ProfileDatas 
-        add constraint FKFE5D3DEC7BF48426 
-        foreign key (ProfileFk) 
-        references Profiles;
-
-    alter table Profiles 
-        add constraint FKF9BEAD9C9DCE619A 
-        foreign key (UserFk) 
-        references Users;
-
     create table hibernate_unique_key (
-         next_hi int4 
+         next_hi INTEGER 
     );
 
     insert into hibernate_unique_key values ( 1 );

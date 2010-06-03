@@ -3,6 +3,7 @@ using Shaml.Core.DomainModel;
 using Shaml.Core.PersistenceSupport;
 using Shaml.Membership.Core;
 using System;
+using System.Collections.Generic;
 
 namespace CodeChirp.Core
 {
@@ -16,6 +17,5 @@ namespace CodeChirp.Core
 
         [NotNull]
         public virtual Site site { get; set; }
-
     }
 }

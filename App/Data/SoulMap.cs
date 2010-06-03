@@ -14,9 +14,8 @@ namespace CodeChirp.Data.Mapping
    {
        public void Override(AutoMapping<Soul> mapping)
        {
-         // mapping.Map(x => x.name).CustomType("StringClob").CustomSqlType("text");
-         // mapping.Map(x => x.gravatar).CustomType("StringClob").CustomSqlType("text");
-         // mapping.Map(x => x.point).CustomType("StringClob").CustomSqlType("text");
+           mapping.Map(x => x.sitename).Index("soul_site_name_index");
+           mapping.Map(x => x.siteid).Index("soul_site_id_index");
        }
    }
 }

@@ -80,6 +80,7 @@
     <Compile Include="Site.cs" />
     <Compile Include="Soul.cs" />
     <Compile Include="Badge.cs" />
+    <Compile Include="StaticData.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="Post.cs" />
   </ItemGroup>

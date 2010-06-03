@@ -3,13 +3,17 @@ using Shaml.Core.DomainModel;
 using Shaml.Core.PersistenceSupport;
 using Shaml.Membership.Core;
 using System;
+using Iesi.Collections;
+using Iesi.Collections.Generic;
 
 namespace CodeChirp.Core
 {
     
     public class Soul : Entity
     {
-        public Soul() { }
+        public Soul() {
+            badges = new HashedSet<Badge>();
+        }
 
         [NotNull]
         public virtual string name { get; set; }
@@ -18,12 +22,14 @@ namespace CodeChirp.Core
         public virtual string gravatar { get; set; }
 
         [NotNull]
-        public virtual int point { get; set; }
+        public virtual long point { get; set; }
 
         [NotNull]
-        public virtual Site site { get; set; }
+        public virtual Site sitename { get; set; }
 
         [NotNull]
-        public virtual int siteid { get; set; }
+        public virtual long siteid { get; set; }
+
+        public virtual ISet<Badge> badges { get; protected set; }
     }
 }

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets='Build' ToolsVersion='3.5' xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=' &apos;$(Configuration)&apos; == &apos;&apos; '>Debug</Configuration>
-    <Platform Condition=' &apos;$(Platform)&apos; == &apos;&apos; '>AnyCPU</Platform>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{33500762-1B80-4AC3-88AF-029A1043AF71}</ProjectGuid>
@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=' &apos;$(Configuration)|$(Platform)&apos; == &apos;Debug|AnyCPU&apos; '>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,7 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=' &apos;$(Configuration)|$(Platform)&apos; == &apos;Release|AnyCPU&apos; '>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,69 +31,73 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include='FluentNHibernate, Version=1.0.0.593, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL'>
+    <Reference Include="FluentNHibernate, Version=1.0.0.593, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libraries\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include='NHibernate, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL'>
+    <Reference Include="NHibernate, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libraries\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include='NHibernate.Validator, Version=1.2.0.2001, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL'>
+    <Reference Include="NHibernate.Validator, Version=1.2.0.2001, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libraries\NHibernate.Validator.dll</HintPath>
     </Reference>
-    <Reference Include='Shaml.Core'>
+    <Reference Include="Shaml.Core">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libraries\Shaml.Core.dll</HintPath>
     </Reference>
-    <Reference Include='Shaml.Core.Validator'>
+    <Reference Include="Shaml.Core.Validator">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libraries\Shaml.Core.Validator.dll</HintPath>
     </Reference>
-    <Reference Include='Shaml.Data'>
+    <Reference Include="Shaml.Data">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libraries\Shaml.Data.dll</HintPath>
     </Reference>
-    <Reference Include='Shaml.Membership'>
+    <Reference Include="Shaml.Membership">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libraries\Shaml.Membership.dll</HintPath>
     </Reference>
-    <Reference Include='System'/>
-    <Reference Include='System.Core'>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include='System.Xml.Linq'>
+    <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include='System.Data.DataSetExtensions'>
+    <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include='System.Data'/>
-    <Reference Include='System.Xml'/>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include='..\..\Config\CommonAssemblyInfo.cs'>
+    <Compile Include="..\..\Config\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include='Mapping\AutoPersistenceModelGenerator.cs'/>
-    <Compile Include='Mapping\Conventions\ForeignKeyConvention.cs'/>
-    <Compile Include='Mapping\Conventions\HasManyConvention.cs'/>
-    <Compile Include='Mapping\Conventions\HasManyToManyConvention.cs'/>
-    <Compile Include='Mapping\Conventions\ManyToManyTableNameConvention.cs'/>
-    <Compile Include='Mapping\Conventions\PrimaryKeyConvention.cs'/>
-    <Compile Include='Mapping\Conventions\ReferenceConvention.cs'/>
-    <Compile Include='Mapping\Conventions\TableNameConvention.cs'/>
-    <Compile Include='Properties\AssemblyInfo.cs'/>
-    
-  <Compile Include='SoulMap.cs'/><Compile Include='BadgeMap.cs'/><Compile Include='TagMap.cs'/><Compile Include='PostMap.cs'/></ItemGroup>
+    <Compile Include="Mapping\AutoPersistenceModelGenerator.cs" />
+    <Compile Include="Mapping\Conventions\EnumConvention.cs" />
+    <Compile Include="Mapping\Conventions\ForeignKeyConvention.cs" />
+    <Compile Include="Mapping\Conventions\HasManyConvention.cs" />
+    <Compile Include="Mapping\Conventions\HasManyToManyConvention.cs" />
+    <Compile Include="Mapping\Conventions\ManyToManyTableNameConvention.cs" />
+    <Compile Include="Mapping\Conventions\PrimaryKeyConvention.cs" />
+    <Compile Include="Mapping\Conventions\ReferenceConvention.cs" />
+    <Compile Include="Mapping\Conventions\TableNameConvention.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoulMap.cs" />
+    <Compile Include="BadgeMap.cs" />
+    <Compile Include="TagMap.cs" />
+    <Compile Include="PostMap.cs" />
+  </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include='..\Core\CodeChirp.Core.csproj'>
+    <ProjectReference Include="..\Core\CodeChirp.Core.csproj">
       <Project>{E7B9DBBF-74D5-4A30-B497-13B7C441FABC}</Project>
       <Name>CodeChirp.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project='$(MSBuildToolsPath)\Microsoft.CSharp.targets'/>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

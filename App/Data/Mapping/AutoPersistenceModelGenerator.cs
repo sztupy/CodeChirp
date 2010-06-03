@@ -59,6 +59,7 @@ namespace CodeChirp.Data.Mapping
                 c.Add<CodeChirp.Data.Mapping.Conventions.PrimaryKeyConvention>();
                 c.Add<CodeChirp.Data.Mapping.Conventions.ReferenceConvention>();
                 c.Add<CodeChirp.Data.Mapping.Conventions.TableNameConvention>();
+                c.Add<CodeChirp.Data.Mapping.Conventions.EnumConvention>();
             };
         }
 

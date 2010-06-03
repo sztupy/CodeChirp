@@ -14,7 +14,7 @@ namespace CodeChirp.Data.Mapping
    {
        public void Override(AutoMapping<Tag> mapping)
        {
-         // mapping.Map(x => x.name).CustomType("StringClob").CustomSqlType("text");
+           mapping.Map(x => x.site).Index("tag_site_name_index");
        }
    }
 }

@@ -5,6 +5,7 @@ using Shaml.Membership.Core;
 using System;
 using Salient.StackApps.Routes;
 using System.Collections.Generic;
+using Iesi.Collections.Generic;
 
 namespace CodeChirp.Core
 {
@@ -12,7 +13,7 @@ namespace CodeChirp.Core
     public class Post : Entity
     {
         public Post() {
-            tags = new List<Tag>();
+            tags = new HashedSet<Tag>();
         }
 
         [NotNull]
@@ -28,21 +29,25 @@ namespace CodeChirp.Core
         public virtual bool community { get; set; }
 
         [NotNull]
-        public virtual int score { get; set; }
+        public virtual long score { get; set; }
+
+        public virtual Soul user { get; set; }
 
         [NotNull]
-        public virtual Soul user { get; set; }
+        public virtual DateTime lastedit { get; set; }
 
         [NotNull]
         public virtual DateTime lastactivity { get; set; }
 
         [NotNull]
-        public virtual List<Tag> tags { get; protected set; }
+        public virtual ISet<Tag> tags { get; protected set; }
+
+        public virtual Post parent { get; set; }
 
         [NotNull]
-        public virtual Site site { get; set; }
+        public virtual Site sitename { get; set; }
 
         [NotNull]
-        public virtual int siteid { get; set; }
+        public virtual long siteid { get; set; }
     }
 }

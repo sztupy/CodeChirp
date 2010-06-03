@@ -14,14 +14,10 @@ namespace CodeChirp.Data.Mapping
    {
        public void Override(AutoMapping<Post> mapping)
        {
-         // mapping.Map(x => x.type).CustomType("StringClob").CustomSqlType("text");
-         // mapping.Map(x => x.summary).CustomType("StringClob").CustomSqlType("text");
-         // mapping.Map(x => x.body).CustomType("StringClob").CustomSqlType("text");
-         // mapping.Map(x => x.community).CustomType("StringClob").CustomSqlType("text");
-         // mapping.Map(x => x.score).CustomType("StringClob").CustomSqlType("text");
-         // mapping.Map(x => x.user).CustomType("StringClob").CustomSqlType("text");
-         // mapping.Map(x => x.lastactivity).CustomType("StringClob").CustomSqlType("text");
-         // mapping.Map(x => x.tags).CustomType("StringClob").CustomSqlType("text");
+         mapping.Map(x => x.body).CustomType("StringClob").CustomSqlType("text");
+         mapping.Map(x => x.sitename).Index("post_site_name_index");
+         mapping.Map(x => x.siteid).Index("post_site_id_index");
+         mapping.HasManyToMany<Tag>(x => x.tags);
        }
    }
 }
