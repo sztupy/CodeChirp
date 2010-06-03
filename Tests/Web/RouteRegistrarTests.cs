@@ -21,8 +21,8 @@ namespace Tests.CodeChirp
         [Test]
         public void CanVerifyRouteMaps()
         {
-            "~/".Route().ShouldMapTo<HomeController>(x => x.Index());
-            "~/OpenId".Route().ShouldMapTo<OpenIDController>(x => x.Index());
+            "~/".Route().ShouldMapTo<HomeController>(x => x.Index(null));
+            "~/OpenId".Route().ShouldMapTo<OpenIdController>(x => x.Index());
             "~/Account/LogOn".Route().ShouldMapTo<AccountController>(x => x.LogOn());
             "~/Account/LogOff".Route().ShouldMapTo<AccountController>(x => x.LogOff());
             "~/MembershipAdministration".Route().ShouldMapTo<MembershipAdministrationController>(x => x.Index(null,null));

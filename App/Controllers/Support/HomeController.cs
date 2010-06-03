@@ -7,6 +7,7 @@ using Shaml.Core;
 using CodeChirp.Core;
 using CodeChirp.ApplicationServices;
 using Shaml.Web;
+using Shaml.Core.PersistenceSupport.NHibernate;
 
 namespace CodeChirp.Controllers
 {
@@ -14,10 +15,24 @@ namespace CodeChirp.Controllers
     [GenericLogger]
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private INHibernateQueryRepository<Post> postRepository;
+
+        public HomeController(INHibernateQueryRepository<Post> postRepository)
         {
+            this.postRepository = postRepository;
+        }
+
+        public ActionResult Index(int? page)
+        {
+            int p = 0;
+            if (page.HasValue && page.Value>0)
+            {
+                p = page.Value;
+            }
 			Response.AppendHeader("X-XRDS-Location", new Uri(Request.Url, Response.ApplyAppPathModifier("~/OpenId/XRDS")).AbsoluteUri);
-            return View();
+            IList<Post> post = postRepository.GetAll(54, p, postRepository.CreateOrder("lastedit", true));
+            ViewData["page"] = p+1;
+            return View(post);
         }
     }
 }

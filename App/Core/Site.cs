@@ -30,5 +30,17 @@ namespace CodeChirp.Core
                 default: return "";
             }
         }
+
+        static public string GetIcon(this Site s)
+        {
+            switch (s)
+            {
+                case Site.MetaStackOverflow: return "http://sstatic.net/mso/favicon.ico";
+                case Site.StackOverflow: return "http://sstatic.net/so/favicon.ico";
+                case Site.ServerFault: return "http://sstatic.net/sf/favicon.ico";
+                case Site.SuperUser: return "http://sstatic.net/su/favicon.ico";
+                default: return "";
+            }
+        }
     }
 }

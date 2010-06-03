@@ -241,6 +241,9 @@
     <None Include="App\Stylesheets\ie.sass" />
     <None Include="App\Stylesheets\print.sass" />
     <None Include="App\Stylesheets\screen.sass" />
+    <None Include="App\Views\Shared\_MiniPost.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
     <Content Include="App\Views\Home\Index.aspx" />
     <Content Include="App\Views\Shared\Site.master" />
     <Content Include="App\Views\Web.config" />

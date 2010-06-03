@@ -1,105 +1,150 @@
 @import "blueprint";
 @import "blueprint/scaffolding";
+@import "blueprint/typography";
 @import "compass/reset";
 @import "compass/layout";
 @import "compass/utilities";
 
-@include blueprint;
+@include blueprint-typography;
 
-// Remove the scaffolding when you're ready to start doing visual design.
-// Or leave it in if you're happy with how blueprint looks out-of-the-box
-
-// scheme ID: 0061TtIgFMPNi
-
-$bgcolor: #f6d1b3;
+$bgcolor: #8ecc87;
+$sidecolor: #b2f1ab;
 $maincolor: white;
-$mainborder: unquote("1px solid #610202");
-$bordercolor: #610202;
-$footerbgcolor: #823838;
-$footercolor: #eeeeee;
-$footerborder: unquote("1px solid #612D02");
-$headercolor: #823838;
-$headerborder: unquote("1px solid #610202");
 $tableheader: #acedac;
-
-thead th {
-  background: $tableheader; }
 
 body {
   background-color: $bgcolor; }
 
 #mainContent {
   @include container;
-  background-color: $maincolor;
-  border: {
-    left: $mainborder;
-    right: $mainborder; }; }
+  margin-left: 0; }
 
 #topContainer {
   @include column(24, true);
-  background-color: $headercolor;
-  border-bottom: $headerborder;
-  padding-bottom: 0;
+  padding-bottom: 60px;
+  padding-top: 0px;
   h1 {
-    font: {
-      family: Georgia, serif;
-      size: 3em; };
-    color: $maincolor;
-    text-align: center;
-    padding-top: 0.5em;
-    padding-bottom: 0; } }
+    @include replace-text("codechirp_top.png");
+    margin: 0;
+    padding: 0;
+    height: 130px;
+    width: 500px;
+    position:absolute;
+    top:0px;
+    left:0px; }
+  h2 {
+    @include replace-text("codechirp_bottom.png");
+    margin: 0;
+    padding: 0;
+    height: 111px;
+    width: 143px;
+    position:absolute;
+    top:130px;
+    left:0px; } }
 
 #columnsContainer {
-  @include column(24, true); }
+  @include prepend(2);
+  @include column(22, true); }
 
 #leftColumn {
-  @include column(6);
-  p {
-    padding-left: 5px;
-    padding-top: 1em; }
-  h2 {
-    border-bottom: 1px solid #fbfbfb;
-    padding-left: 5px;
-    padding-bottom: 0; }
-  ul {
-    padding-left: 5px; } }
+  @include column(16);
+  background:url("Images/whiteborder.png") bottom left no-repeat; 
+  padding: 0px;
+  #leftTop {
+    background:url("Images/whiteborder.png") top left no-repeat; 
+    height: 7px;
+  }
+  #leftMain {
+    h2 {
+      text-align:right;
+      padding-bottom: 40px;
+    }
+    width: 610px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: $maincolor; } }
 
 #rightColumn {
-  @include column(18, true); }
+  @include column(6, true); 
+  .block {
+    background:url("Images/greenborder.png") bottom left no-repeat;
+    padding: 0px;
+    padding-bottom: 10px;
+    margin-bottom: 2em;
+    .blockTop { 
+      background:url("Images/greenborder.png") top left no-repeat; 
+      height: 10px; }
+    .blockMain { 
+      width: 210px;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: $sidecolor; } } }
 
 #footer {
-  background-color: $footerbgcolor;
-  border-top: $footerborder;
-  color: $footercolor;
   height: 75px;
+  width: 960px;
   text-align: center;
-  a {
-    color: $footercolor + 32;
-  }
-  a:hover {
-      color: $footercolor;
-  }
 }
 
 .field-validation-error {
   color: red; }
-
-@include sticky-footer(75px, "#mainContent", "#endMain", "#footer");
 
 li.footer {
   float: left;
   width: 250px;
   height: 75px;
   list-style-type: none;
-  border: {
-    right: {
-      color: $bordercolor;
-      width: 1px;
-      style: dashed; }; };
   li {
     list-style-type: none; } }
 
-// OPENID selecto stylesheets
+a {
+  text-decoration: none;
+  color: #0033FF;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #0066FF;  
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+// Postlist
+
+ul.postlist {
+  margin: 0;
+  padding: 0;
+}
+
+li.post {
+  list-style-type: none;
+  padding-left: 48px;
+  img.gravatar {
+    position: absolute;
+    margin-left: -36px;
+  }
+  img.siteicon {
+    position: absolute;
+    margin-left: -36px;
+    margin-top: 34px;
+  }
+  div.tags {
+    kbd {
+      border: 1px solid black;
+      background-color: #eeeeee;
+      padding: 2px;
+      color: black;
+      margin: 0 2px;
+    }
+  }
+  padding-top: 0.5em;
+  border-bottom: 1px dashed black;
+}
+
+// OPENID selector stylesheets
 
 #openid_form {
   width: 490px;
@@ -139,3 +184,4 @@ li.footer {
 
 .openid_selected {
   border: 4px solid #dddddd; }
+

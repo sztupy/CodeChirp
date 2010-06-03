@@ -82,6 +82,7 @@ namespace CodeChirp.ApplicationServices
             {
                 ImportAnswer(post, a);
             }
+            postRepository.DbContext.CommitChanges(true);
         }
 
         public void ImportComment(Post parent, Comments c)
@@ -149,6 +150,7 @@ namespace CodeChirp.ApplicationServices
                 }
                 else
                 {
+                    sb.Append("...");
                     break;
                 }
                 i++;
@@ -188,6 +190,7 @@ namespace CodeChirp.ApplicationServices
                 userRepository.DbContext.BeginTransaction();
                 foreach (Questions q in result.questions)
                 {
+                    System.Console.WriteLine("Importing Question {0}", q.title);
                     ImportQuestion(q);
                 }
                 userRepository.DbContext.CommitTransaction();

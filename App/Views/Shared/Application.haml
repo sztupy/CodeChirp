@@ -10,26 +10,29 @@
     %script( type="text/javascript" src="/Public/Scripts/MicrosoftMvcValidation.js" )
     %link( href="/Public/Content/screen.css" media="screen,projection" rel="stylesheet" type="text/css" )
     %link( href="/Public/Content/print.css" media="print" rel="stylesheet" type="text/css" )
-    /[if lt IE 7]
+    /[if le IE 7]
       %link( href="/Public/Content/ie.css" media="screen,projection" rel="stylesheet" type="text/css" )
     @contentplaceholder=Title
-      %title S#aml Architecture
+      %title CodeChirp
   %body
     #mainContent
       #topContainer
         %h1
-          S#aml Architecture
+          CodeChirp
+        %h2
+          CodeChirp
       #columnsContainer
         #leftColumn
-          %p
-            %img( src="/Public/Content/Images/shaml_large.jpg" alt="S#aml architecture logo" )
-          %p
-            _ LogOnUserControl
-          %h2
-            Main Menu
-          _ MainMenu
+          #leftTop
+          #leftMain
+            _
         #rightColumn
-          _
+          .block
+            .blockTop
+            .blockMain
+              _ LogOnUserControl
+          @contentplaceholder=MoreBlocks
+            /
           #endMain
     #footer
       _ Footer

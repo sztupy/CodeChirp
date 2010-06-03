@@ -1,0 +1,23 @@
+﻿@namespace=CodeChirp.Core
+@type=Post
+%div.site
+  %img.siteicon( src="#{Model.sitename.GetIcon()}" )/        
+%div.user
+  - if (Model.user != null)
+    %img.gravatar( src="http://www.gravatar.com/avatar/#{Model.user.gravatar}?s=32&d=identicon&r=PG" )/
+    %a( href="#" )= Model.user.name
+    %strong= Model.user.point
+  - else
+    \-
+    %strong 0
+%div.tags
+  - foreach (Tag t in Model.tags)
+    %a( href="#" )
+      %kbd
+        = t.name
+%div.summary
+  = Model.summary
+%div.links
+  %a( href="#{Model.ToUrl()}" target="newwindow" )
+    Read at
+    %img( src="#{Model.sitename.GetIcon()}" )/

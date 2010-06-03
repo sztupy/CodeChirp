@@ -60,6 +60,7 @@ namespace CodeChirp.ApplicationServices
                     badges.Add(badge);
                 }
             }
+            badgeRepository.DbContext.CommitChanges(true);
             return badges;
         }
 
@@ -73,19 +74,21 @@ namespace CodeChirp.ApplicationServices
 
                 badgeRepository.DbContext.BeginTransaction();
                 List<Badge> badges = GetBadges();
+                badgeRepository.DbContext.CommitTransaction();
                 System.Console.WriteLine("Got {0} badges", badges.Count);
                 foreach (Badge badge in badges)
                 {
-                    System.Console.WriteLine("Enumerating badge {0} ({1})", badge.name, badge.count);
                     BadgesByIdRouteMap target = new BadgesByIdRouteMap();
                     target.JsonText = true;
                     target.Parameters.id = new string[] { badge.siteid.ToString() };
-                    target.Parameters.page = 0;
+                    target.Parameters.page = 1;
                     target.Parameters.pagesize = 100;
 
                     BadgesByIdResult result = target.GetResult();
                     while (((result.page-1) * result.pagesize < result.total) && (result.users.Length > 0))
                     {
+                        badgeRepository.DbContext.BeginTransaction();
+                        System.Console.WriteLine("Enumerating badge {0} ({1}) page {2}", badge.name, badge.count, result.page);
                         foreach (Users u in result.users) {
                             Soul soul = userimport.Import(userRepository, currentSite, u);
                             if (soul != null)
@@ -95,9 +98,12 @@ namespace CodeChirp.ApplicationServices
                         }
                         target.Parameters.page++;
                         result = target.GetResult();
+                        badgeRepository.Update(badge);
+                        badgeRepository.DbContext.CommitChanges(true);
+                        badgeRepository.DbContext.CommitTransaction();
                     }
                 }
-                badgeRepository.DbContext.CommitTransaction();
+                
 
                 System.Console.WriteLine("{0} api calls left: {1}", Enum.GetName(typeof(Site), site), Api.RemainingRequests);
             }

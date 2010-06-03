@@ -1,28 +1,21 @@
-﻿%div
-  %h2
-    S#aml Architecture Project
-  %h3
-    What next?
-  %p
-    Your S#aml Architecture project is now setup and ready to go.  The only tasks remaining
-    are to:
-    %ol
-      %li
-        Create your database and set the connection string within NHibernate.config
-      %li
-        Import the database schemas found in the db directory
-      %li
-        Open CodeChirp.Tests.dll via NUnit and make sure all the tests are turning green.
-      %li
-        Add your first entity with CRUD scaffolding via <tt>shaml generate resource <i>res-name</i></tt>
-  %p
-    If you need direction on what to do next, take a look at 
-    %a( href="http://code.google.com/p/shaml-architecture/" ) the project homepage
-    , or ask questions at
-    %a( href="http://stackoverflow.com/questions/tagged/shaml" ) Stack Overflow
-    (tag questions with
-    %tt shaml
-    or
-    %tt s#aml
-    )
-  
+﻿@namespace=CodeChirp.Core
+@type=IList<Post>
+
+@content=Main
+  %div
+    %h2
+      Latest activity
+    %ul.postlist
+      - foreach (Post p in Model)
+        %li.post
+          _ MiniPost( model="p" )
+    %div
+      = Html.ActionLink("Next page","Index",new { page = ViewData["page"] })
+@content=MoreBlocks
+  .block
+    .blockTop
+    .blockMain
+      %h3 Active users
+      - foreach (Post p in Model)
+        - if (p.user != null)
+          %img( src="http://www.gravatar.com/avatar/#{p.user.gravatar}?s=32&d=identicon&r=PG" )/

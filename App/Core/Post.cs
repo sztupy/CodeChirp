@@ -49,5 +49,17 @@ namespace CodeChirp.Core
 
         [NotNull]
         public virtual long siteid { get; set; }
+
+        public virtual string ToUrl()
+        {
+            string s = sitename.ToUrl();
+            switch (type)
+            {
+                case PostType.answer: return s + "/questions/" + parent.siteid + "/name/" + siteid + "#" + siteid;
+                case PostType.or: return parent.ToUrl();
+                case PostType.question: return s + "/questions/" + siteid;
+                default: return s;
+            }
+        }
     }
 }
