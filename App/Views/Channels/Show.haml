@@ -3,24 +3,23 @@
 @type=IList<Post>
 @content=Header
   %h2
-    Badge page
+    Channel page
 @content=Main
   %ul.postlist
     %li.post
       .tags
-        - var b = ViewData["badge"] as Badge
-        Badge name: 
-        %a( href='#{Url.Action("Show", "Badges", new { id = b.Id \})}' )
+        - var c = ViewData["channel"] as Channel
+        Channel name: 
+        %a( href='#{Url.Action("Show", "Channels", new { id = c.Id \})}' )
           %kbd
-            %img( src="#{b.sitename.GetIcon()}" )/
-            = b.name
-            (#{b.rank})
-  %h2 Users for badge
+            = c.name
+            (by #{c.owner.Comment})
+  %h2 Users in the channel
   %ul.postlist
-    - foreach(Soul s in ((Badge)ViewData["badge"]).users)  
+    - foreach(Soul s in ((Channel)ViewData["channel"]).users)  
       %li.post
         _ MiniSoul( model="s" )
-  %h2 Posts for badge
+  %h2 Posts in the channel
   %ul.postlist
     - foreach (Post p in Model)
       %li.post

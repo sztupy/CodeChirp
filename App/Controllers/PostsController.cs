@@ -16,6 +16,7 @@ using Shaml.Core.DomainModel;
 using Shaml.Core.PersistenceSupport.NHibernate;
 
 using CodeChirp.Core;
+using Shaml.Web.JsonNet;
 
 namespace CodeChirp.Controllers
 {
@@ -29,7 +30,7 @@ namespace CodeChirp.Controllers
             this.PostRepository = PostRepository;
         }
 
-        public ActionResult Index(int? Page, string OrderBy, bool? Desc) {
+        public ActionResult Index(int? Page, string type, bool? Desc) {
             long numResults;
             int page = 0;
             if (Page != null)
@@ -37,15 +38,31 @@ namespace CodeChirp.Controllers
                 page = (int)Page;
             }
             IList<Post> Posts = null;
-            Posts = PostRepository.GetAll(20, page, out numResults, PostRepository.CreateOrder(OrderBy,Desc==true));
-            PaginationData pd = new ThreeWayPaginationData(page, 20, numResults);
+            Posts = PostRepository.GetAll(54, page, out numResults, PostRepository.CreateOrder("lastactivity",Desc==true));
+            PaginationData pd = new ThreeWayPaginationData(page, 54, numResults);
             ViewData["Pagination"] = pd;
-            return View(Posts);
+            if (type == "json")
+            {
+                return new JsonNetResult(Posts);
+            } else
+            {
+                return View(Posts);
+            }
         }
 
-        public ActionResult Show(int id) {
+        public ActionResult Show(int id, string type) {
             Post Post = PostRepository.Get(id);
-            return View(Post);
+            if (type == "html")
+            {
+                return PartialView("MaxiPost", Post);
+            }
+            else if (type == "json")
+            {
+                return new JsonNetResult(Post);
+            } else
+            {
+                return View(Post);
+            }
         }
 
         private readonly INHibernateQueryRepository<Post> PostRepository;

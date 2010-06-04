@@ -10,13 +10,12 @@ using CodeChirp.Core;
 
 namespace CodeChirp.Data.Mapping
 {
-   public class SoulMap : IAutoMappingOverride<Soul>
+   public class ChannelMap : IAutoMappingOverride<Channel>
    {
-       public void Override(AutoMapping<Soul> mapping)
+       public void Override(AutoMapping<Channel> mapping)
        {
-           mapping.Map(x => x.name).Index("soul_name_index");
-           mapping.Map(x => x.sitename).Index("soul_site_name_index");
-           mapping.Map(x => x.siteid).Index("soul_site_id_index");
+           mapping.Map(x => x.name).Index("channel_name_index");
+           mapping.HasManyToMany<Soul>(x => x.users);
        }
    }
 }

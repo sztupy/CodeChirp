@@ -1,12 +1,15 @@
 ﻿@type=List<string>
-%div
-  %h2 List of OpenID identities for this account:
-  %ul
-    - foreach (string id in ViewData.Model)
-      %li
-        = id
-        - using(Html.BeginForm( "RemoveOpenIdAccount", "OpenId", new { openid_identifier = id } ))
-          = Html.Hidden("openIdIdentifier", id)
-          %input( type="submit" name="submit" value="Delete" )
-  = Html.ActionLink("Assign new ID","Login")
-  = Html.ActionLink("Logout","Logout")
+@content=Header
+  %h2 OpenId Login
+@content=Main
+  %div
+    %h2 List of OpenID identities for this account:
+    %ul
+      - foreach (string id in ViewData.Model)
+        %li
+          = id
+          - using(Html.BeginForm( "RemoveOpenIdAccount", "OpenId", new { openid_identifier = id } ))
+            = Html.Hidden("openIdIdentifier", id)
+            %input( type="submit" name="submit" value="Delete" )
+    = Html.ActionLink("Assign new ID","Login")
+    = Html.ActionLink("Logout","Logout")

@@ -5,8 +5,8 @@ using Shaml.Web;
 
 namespace CodeChirp.Controllers
 {
-	  [Authorize( Roles="Administrator" )]
+	[Authorize( Roles="Administrator" )]
     [GenericLogger]
-	  [HandleError]
+	[HandleError]
     public class MembershipAdministrationController : MembershipAdministrationController_Base{}
 }

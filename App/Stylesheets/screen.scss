@@ -13,7 +13,10 @@ $maincolor: white;
 $tableheader: #acedac;
 
 body {
-  background-color: $bgcolor; }
+  background-color: $bgcolor;
+  background-image: url("Images/topgrad.png");
+  background-position: top;
+  background-repeat: repeat-x; }
 
 #mainContent {
   @include container;
@@ -57,7 +60,6 @@ body {
   #leftMain {
     h2 {
       text-align:right;
-      padding-bottom: 40px;
     }
     width: 610px;
     margin-bottom: 10px;
@@ -120,16 +122,19 @@ ul.postlist {
 }
 
 li.post {
+  clear:both;
   list-style-type: none;
   padding-left: 48px;
   img.gravatar {
     position: absolute;
     margin-left: -36px;
+    z-index: 4;
   }
   img.siteicon {
     position: absolute;
-    margin-left: -36px;
-    margin-top: 34px;
+    margin-left: -52px;
+    z-index: 5;
+    // margin-top: 34px;
   }
   div.tags {
     kbd {
@@ -140,8 +145,31 @@ li.post {
       margin: 0 2px;
     }
   }
+  pre {
+    background-color: #ddd;
+    width: 500px;
+    max-height: 30em;
+    overflow:auto;
+  }
   padding-top: 0.5em;
   border-bottom: 1px dashed black;
+}
+
+ul.mainmenu {
+  margin-left: auto;
+  text-align: center;
+  border-bottom: 1px solid black;
+  li {
+    text-align: center;
+    border: 1px solid black;
+    padding: 2px;
+    color: black;
+    margin: 0 2px;
+    float: right;
+    width: 75px;
+    height: 1.5em;
+    list-style-type: none;
+  }
 }
 
 // OPENID selector stylesheets

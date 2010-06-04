@@ -41,7 +41,7 @@ namespace CodeChirp.Controllers {
             get;
             private set;
         }
-
+        /*
         public ActionResult LogOn() {
 
             return View();
@@ -64,7 +64,7 @@ namespace CodeChirp.Controllers {
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        */
         public ActionResult LogOff() {
 
             FormsAuth.SignOut();
@@ -72,14 +72,14 @@ namespace CodeChirp.Controllers {
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Register() {
+        /*public ActionResult Register() {
 
             ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
 
             return View();
-        }
+        }*/
 
-        [AcceptVerbs(HttpVerbs.Post)]
+       /* [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Register(string userName, string email, string password, string confirmPassword) {
 
             ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
@@ -89,7 +89,7 @@ namespace CodeChirp.Controllers {
                 MembershipCreateStatus createStatus = MembershipService.CreateUser(userName, password, email);
 
                 if (createStatus == MembershipCreateStatus.Success) {
-                    FormsAuth.SignIn(userName, false /* createPersistentCookie */);
+                    FormsAuth.SignIn(userName, false /* createPersistentCookie *//*);
                     return RedirectToAction("Index", "Home");
                 }
                 else {
@@ -99,9 +99,9 @@ namespace CodeChirp.Controllers {
 
             // If we got this far, something failed, redisplay form
             return View();
-        }
+        }*/
 
-        [Authorize]
+       /* [Authorize]
         public ActionResult ChangePassword() {
 
             ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
@@ -139,8 +139,8 @@ namespace CodeChirp.Controllers {
         public ActionResult ChangePasswordSuccess() {
 
             return View();
-        }
-
+        }*/
+        /*
         protected override void OnActionExecuting(ActionExecutingContext filterContext) {
             if (filterContext.HttpContext.User.Identity is WindowsIdentity) {
                 throw new InvalidOperationException("Windows authentication is not supported.");
@@ -235,6 +235,6 @@ namespace CodeChirp.Controllers {
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
-        #endregion
+        #endregion*/
     }
 }

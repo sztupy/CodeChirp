@@ -1,0 +1,22 @@
+﻿@namespace=CodeChirp.Core
+@type=Soul
+%div( id='Post#{Model.Id}' )
+  %div.site
+    %img.siteicon( src="#{Model.sitename.GetIcon()}" )/        
+  %div.user
+    %img.gravatar( src="http://www.gravatar.com/avatar/#{Model.gravatar}?s=32&d=identicon&r=PG" )/
+    = Html.ActionLink(Model.name, "Show", "Souls", new { id = Model.Id }, new object { } )
+    %strong= Model.point
+  %div.tags
+    - foreach (Badge b in Model.badges)
+      %a( href='#{Url.Action("Show", "Badges", new { id = b.Id \})}' )
+        %kbd
+          %img( src="#{b.sitename.GetIcon()}" )/
+          = b.name
+          (#{b.rank})
+  %div.links
+    %a( href="#{Model.ToUrl()}" target="newwindow" )
+      Check the user at
+      %img( src="#{Model.sitename.GetIcon()}" )/
+        
+      

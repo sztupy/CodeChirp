@@ -1,0 +1,16 @@
+@namespace=CodeChirp.Core
+@namespace=CodeChirp.Controllers
+@namespace=Shaml.Web.HtmlHelpers
+@type=List<Channel>
+@content=Header
+  %h2
+    Manage your channels
+@content=Main
+  %ul.postlist
+    - foreach (Channel c in Model)
+      %li.post
+        .tags
+          %kbd
+            = c.name
+          %a( href='#{Url.Action("Edit", "Channels", new { id = c.Id \})}' ) Edit
+          %a( href='#{Url.Action("Delete", "Channels", new { id = c.Id \})}' ) Delete

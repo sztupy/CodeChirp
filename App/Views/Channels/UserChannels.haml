@@ -1,0 +1,11 @@
+@namespace=CodeChirp.Core
+@namespace=CodeChirp.Controllers
+@namespace=Shaml.Web.HtmlHelpers
+@type=List<Channel>
+.block
+  .blockTop
+  .blockMain
+    %h3 Add to channels
+    %ul
+      - foreach (Channel c in Model)
+        %li= Html.ActionLink("Add to " + c.name,"Add","Channels",new { Id = c.Id, Data = ViewData["data"] }, new {} )

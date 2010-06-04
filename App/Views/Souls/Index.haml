@@ -2,28 +2,20 @@
 @namespace=CodeChirp.Controllers
 @namespace=Shaml.Web.HtmlHelpers
 @type=List<Soul>
-%div
-  %h2 Souls
-  - if (ViewContext.TempData["message"] != null)
-    %p= ViewContext.TempData["message"]
-  %table
-    %thead
-      %tr
-        %th= Html.SwitchOrderLink("name","name")
-        %th= Html.SwitchOrderLink("gravatar","gravatar")
-        %th= Html.SwitchOrderLink("point","point")
-        %th( colspan=3 ) Action
-    %tbody
-      - foreach (Soul Soul in ViewData.Model)
-        %tr
-          %td= Soul.name
-          %td= Soul.gravatar
-          %td= Soul.point
-          %td
-            = Html.ActionLink("Details", "Show", "Souls", new { Id = Soul.Id }, new { })
-          %td
-            = Html.ActionLink("Edit", "Edit", "Souls", new { Id = Soul.Id }, new { })
-          %td
-            = Html.ActionLink("Delete", "Delete", "Souls", new { Id = Soul.Id }, new { })
-  %p= Html.RenderPagination(ViewData["Pagination"] as PaginationData)
-  %p= Html.ActionLink("Create new Soul", "Create", "Souls")
+@content=Header
+  %h2
+    List of users
+@content=Main
+  %ul.postlist
+    - foreach (Soul s in Model)
+      %li.post
+        _ MiniSoul( model="s" )
+  %div= Html.RenderPagination(ViewData["Pagination"] as PaginationData)
+@content=MoreBlocks
+  .block
+    .blockTop
+    .blockMain
+      - using(Html.BeginForm("Index","Souls",FormMethod.Get))
+        %p Search for users:
+          = Html.TextBox("q",ViewContext.HttpContext.Request.Params.Get("q"))  
+      

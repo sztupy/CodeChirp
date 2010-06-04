@@ -1,21 +1,13 @@
 ﻿@namespace=CodeChirp.Core
 @type=IList<Post>
-
+@content=Header
+  %h2
+    Latest activity
 @content=Main
-  %div
-    %h2
-      Latest activity
-    %ul.postlist
-      - foreach (Post p in Model)
-        %li.post
-          _ MiniPost( model="p" )
-    %div
-      = Html.ActionLink("Next page","Index",new { page = ViewData["page"] })
+  %ul.postlist
+    - foreach (Post p in Model)
+      %li.post
+        _ MiniPost( model="p" )
+  %div= Html.ActionLink("Next page","Index",new { page = ViewData["page"] })
 @content=MoreBlocks
-  .block
-    .blockTop
-    .blockMain
-      %h3 Active users
-      - foreach (Post p in Model)
-        - if (p.user != null)
-          %img( src="http://www.gravatar.com/avatar/#{p.user.gravatar}?s=32&d=identicon&r=PG" )/
+  _ UserMatrix( model="Model" )

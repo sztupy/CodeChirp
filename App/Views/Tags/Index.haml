@@ -2,24 +2,24 @@
 @namespace=CodeChirp.Controllers
 @namespace=Shaml.Web.HtmlHelpers
 @type=List<Tag>
-%div
-  %h2 Tags
-  - if (ViewContext.TempData["message"] != null)
-    %p= ViewContext.TempData["message"]
-  %table
-    %thead
-      %tr
-        %th= Html.SwitchOrderLink("name","name")
-        %th( colspan=3 ) Action
-    %tbody
-      - foreach (Tag Tag in ViewData.Model)
-        %tr
-          %td= Tag.name
-          %td
-            = Html.ActionLink("Details", "Show", "Tags", new { Id = Tag.Id }, new { })
-          %td
-            = Html.ActionLink("Edit", "Edit", "Tags", new { Id = Tag.Id }, new { })
-          %td
-            = Html.ActionLink("Delete", "Delete", "Tags", new { Id = Tag.Id }, new { })
-  %p= Html.RenderPagination(ViewData["Pagination"] as PaginationData)
-  %p= Html.ActionLink("Create new Tag", "Create", "Tags")
+@content=Header
+  %h2
+    List of tags
+@content=Main
+  %ul.postlist
+    - foreach (Tag t in Model)
+      %li.post
+        .tags
+          %a( href='#{Url.Action("Show", "Tags", new { id = t.Id \})}' )
+            %kbd
+              %img( src="#{t.site.GetIcon()}" )/
+              = t.name
+  %div= Html.RenderPagination(ViewData["Pagination"] as PaginationData)
+@content=MoreBlocks
+  .block
+    .blockTop
+    .blockMain
+      - using(Html.BeginForm("Index","Tags",FormMethod.Get))
+        %p Search for tags:
+          = Html.TextBox("q",ViewContext.HttpContext.Request.Params.Get("q"))  
+      

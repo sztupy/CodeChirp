@@ -158,20 +158,26 @@
     <Content Include="App\Views\Posts\Show.haml">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="App\Views\Channels\_ChannelForm.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Channels\Create.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Channels\Delete.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Channels\Edit.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Channels\Index.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="App\Views\Channels\Show.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\Views\Account\ChangePassword.haml">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="App\Views\Account\ChangePasswordSuccess.haml">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="App\Views\Account\LogOn.haml">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="App\Views\Account\Register.haml">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
     <Content Include="App\Views\Home\Index.haml">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -241,11 +247,25 @@
     <None Include="App\Stylesheets\ie.sass" />
     <None Include="App\Stylesheets\print.sass" />
     <None Include="App\Stylesheets\screen.sass" />
+    <None Include="App\Views\Channels\UserChannels.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
+    <None Include="App\Views\Channels\Manage.haml" />
+    <None Include="App\Views\Shared\_AddToChannels.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
+    <None Include="App\Views\Shared\_MiniSoul.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
+    <None Include="App\Views\Shared\_MaxiPost.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
     <None Include="App\Views\Shared\_MiniPost.haml">
       <SubType>ASPXCodeBehind</SubType>
     </None>
-    <Content Include="App\Views\Home\Index.aspx" />
-    <Content Include="App\Views\Shared\Site.master" />
+    <None Include="App\Views\Shared\_UserMatrix.haml">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
     <Content Include="App\Views\Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

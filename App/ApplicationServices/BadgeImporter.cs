@@ -13,6 +13,8 @@ namespace CodeChirp.ApplicationServices
 {
     public class BadgeImporter
     {
+        const int MAXNUMBEROFUSERSALLOWED = 10;
+
         INHibernateQueryRepository<Soul> userRepository;
         INHibernateQueryRepository<Tag> tagRepository;
         INHibernateQueryRepository<Badge> badgeRepository;
@@ -43,7 +45,7 @@ namespace CodeChirp.ApplicationServices
             List<Badge> badges = new List<Badge>();
             foreach (Badges b in results.badges)
             {
-                if (b.rank == BadgesRank.gold)
+                if (b.award_count <= MAXNUMBEROFUSERSALLOWED )
                 {
                     Badge badge = badgeRepository.FindOne(new { sitename = currentSite, siteid = b.badge_id });
                     if (badge == null)

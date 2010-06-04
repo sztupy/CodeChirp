@@ -16,6 +16,8 @@ using Shaml.Core.DomainModel;
 using Shaml.Core.PersistenceSupport.NHibernate;
 
 using CodeChirp.Core;
+using Shaml.Web.JsonNet;
+using System.Web;
 
 namespace CodeChirp.Controllers
 {
@@ -23,32 +25,76 @@ namespace CodeChirp.Controllers
     [GenericLogger]
     public class TagsController : Controller
     {
-        public TagsController(INHibernateQueryRepository<Tag> TagRepository) {
+        public TagsController(INHibernateQueryRepository<Tag> TagRepository, INHibernateQueryRepository<Post> PostRepository) {
             Check.Require(TagRepository != null, "TagRepository may not be null");
 
             this.TagRepository = TagRepository;
+            this.PostRepository = PostRepository;
         }
 
-        public ActionResult Index(int? Page, string OrderBy, bool? Desc) {
-            long numResults;
+        public ActionResult Index(int? Page, bool? Desc, string type, string q)
+        {
             int page = 0;
-            if (Page != null)
+            long numResults;
+            if (Page.HasValue && Page.Value >= 0)
             {
-                page = (int)Page;
+                page = Page.Value;
             }
             IList<Tag> Tags = null;
-            Tags = TagRepository.GetAll(20, page, out numResults, TagRepository.CreateOrder(OrderBy,Desc==true));
-            PaginationData pd = new ThreeWayPaginationData(page, 20, numResults);
+            if (q != null)
+            {
+                var eb = TagRepository.CreateExpressionBuilder();
+                IExpression exp = eb.Like("name", "%" + q + "%", true);
+                Tags = TagRepository.FindByExpression(exp, 54, page, out numResults, TagRepository.CreateOrder("name", Desc == true));
+            }
+            else
+            {
+                Tags = TagRepository.GetAll(54, page, out numResults, TagRepository.CreateOrder("name", Desc == true));
+            }
+            PaginationData pd = new ThreeWayPaginationData(page, 54, numResults);
             ViewData["Pagination"] = pd;
-            return View(Tags);
+            if (type == "json")
+            {
+                return new JsonNetResult(Tags);
+            }
+            else
+            {
+                return View(Tags);
+            }
         }
 
-        public ActionResult Show(int id) {
-            Tag Tag = TagRepository.Get(id);
-            return View(Tag);
+        public IList<Post> GetPostsForTag(int id, int Page)
+        {
+            return PostRepository.FindByQuery("select p from Post p join p.tags t where t.Id = " + id + " order by lastedit desc",54,Page);
+        }
+
+        public ActionResult Show(int id, int? Page, string type)
+        {
+            Tag t = TagRepository.Get(id);
+            if (t == null)
+            {
+                throw new HttpException(404, "HTTP/1.1 404 Not Found");
+            }
+            int page = 0;
+            if (Page.HasValue && Page.Value > 0)
+            {
+                page = Page.Value;
+            }
+            IList<Post> p = GetPostsForTag(id, page);
+            ViewData["page"] = page + 1;
+            ViewData["tag"] = t;
+            if (type == "json")
+            {
+                return new JsonNetResult(new { tag = t, data = p });
+            }
+            else
+            {
+                return View(p);
+            }
         }
 
         private readonly INHibernateQueryRepository<Tag> TagRepository;
+        private readonly INHibernateQueryRepository<Post> PostRepository;
     }
 }
 

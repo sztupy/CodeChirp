@@ -4,10 +4,11 @@ using Shaml.Core.PersistenceSupport;
 using Shaml.Membership.Core;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CodeChirp.Core
 {
-    
+    [JsonObject(MemberSerialization.OptOut)]
     public class Tag : Entity
     {
         public Tag() { }

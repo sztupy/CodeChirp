@@ -1,10 +1,10 @@
 ﻿- if (Html.ViewContext.HttpContext.Request.IsAuthenticated)
   Welcome
   %b= Html.Encode(HttpContext.Current.User.Identity.Name)
-  ! [
-  = Html.ActionLink("Log Off", "LogOff", "Account")
-  ]
+  [#{Html.ActionLink("Log Off", "LogOff", "Account")}]
+  %ul
+    %li= Html.ActionLink("Manage OpenID Accounts","Index","OpenId")
+    %li= Html.ActionLink("Manage Channels","Manage","Channels")    
+    %li= Html.ActionLink("Create new Channel","Create","Channels")
 - else
-  [
-  = Html.ActionLink("Log On", "LogOn", "Account")
-  ]
+  [#{Html.ActionLink("Log in using OpenID", "Login", "OpenId")}]

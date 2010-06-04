@@ -1,0 +1,17 @@
+@namespace=CodeChirp.Controllers
+@type=ChannelsController.ChannelFormViewModel
+= Html.ValidationSummary()
+- Html.EnableClientValidation();
+- using (Html.BeginForm()) 
+  = Html.AntiForgeryToken()
+  = Html.Hidden("Channel.Id", (Model.Channel != null) ? Model.Channel.Id : 0)
+  %ul
+    %li
+      = Html.LabelFor( x => x.Channel.name )
+      %div
+        = Html.TextBoxFor( x => x.Channel.name )
+        = Html.ValidationMessageFor( x => x.Channel.name )
+    %li
+      %input( type="submit" name="btnSave" value="Save Channel")/
+      %button( name="btnCancel" onClick="window.location.href = '/Channels';") Cancel
+

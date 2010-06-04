@@ -40,7 +40,7 @@ namespace Tests.Blog.Web.Controllers
 
         [Test]
         public void CanShowPost() {
-            ViewResult result = controller.Show(1).AssertViewRendered();
+            ViewResult result = controller.Show(1,null).AssertViewRendered();
 
 			result.ViewData.ShouldNotBeNull();
 			

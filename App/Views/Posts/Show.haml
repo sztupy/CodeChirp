@@ -1,36 +1,8 @@
+@namespace=CodeChirp.Core
 @type=Post
-%div
-  %h2 Post Details
-  %ul
-  %li
-    %label( for="Post_type" ) type:
-      %span( id="Post_type" )
-        = ViewData.Model.type
-  %li
-    %label( for="Post_summary" ) summary:
-      %span( id="Post_summary" )
-        = ViewData.Model.summary
-  %li
-    %label( for="Post_body" ) body:
-      %span( id="Post_body" )
-        = ViewData.Model.body
-  %li
-    %label( for="Post_community" ) community:
-      %span( id="Post_community" )
-        = ViewData.Model.community
-  %li
-    %label( for="Post_score" ) score:
-      %span( id="Post_score" )
-        = ViewData.Model.score
-  %li
-    %label( for="Post_user" ) user:
-      %span( id="Post_user" )
-        = ViewData.Model.user
-  %li
-    %label( for="Post_lastactivity" ) lastactivity:
-      %span( id="Post_lastactivity" )
-        = ViewData.Model.lastactivity
-  %li
-    %label( for="Post_tags" ) tags:
-      %span( id="Post_tags" )
-        = ViewData.Model.tags
+@content=Header
+  %h2 Showing post
+@content=Main
+  %ul.postlist
+    %li.post
+      _ MaxiPost( model="Model" )

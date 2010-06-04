@@ -1,0 +1,2 @@
+- if (Html.ViewContext.HttpContext.Request.IsAuthenticated)
+  - Html.RenderAction("UserChannels","Channels",new{ Id = Model })

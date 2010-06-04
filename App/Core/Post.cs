@@ -6,12 +6,13 @@ using System;
 using Salient.StackApps.Routes;
 using System.Collections.Generic;
 using Iesi.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CodeChirp.Core
 {
-    
+    [JsonObject(MemberSerialization.OptOut)]
     public class Post : Entity
-    {
+    {  
         public Post() {
             tags = new HashedSet<Tag>();
         }
@@ -59,6 +60,17 @@ namespace CodeChirp.Core
                 case PostType.or: return parent.ToUrl();
                 case PostType.question: return s + "/questions/" + siteid;
                 default: return s;
+            }
+        }
+
+        public virtual string Activity()
+        {
+            switch (type)
+            {
+                case PostType.answer: return "answered";
+                case PostType.or: return "commented";
+                case PostType.question: return "asked";
+                default: return "";
             }
         }
     }

@@ -16,6 +16,8 @@ using Shaml.Core.DomainModel;
 using Shaml.Core.PersistenceSupport.NHibernate;
 
 using CodeChirp.Core;
+using Shaml.Web.JsonNet;
+using System.Web;
 
 namespace CodeChirp.Controllers
 {
@@ -23,32 +25,74 @@ namespace CodeChirp.Controllers
     [GenericLogger]
     public class SoulsController : Controller
     {
-        public SoulsController(INHibernateQueryRepository<Soul> SoulRepository) {
+        public SoulsController(INHibernateQueryRepository<Soul> SoulRepository, INHibernateQueryRepository<Post> PostRepository) {
             Check.Require(SoulRepository != null, "SoulRepository may not be null");
 
             this.SoulRepository = SoulRepository;
+            this.PostRepository = PostRepository;
         }
 
-        public ActionResult Index(int? Page, string OrderBy, bool? Desc) {
-            long numResults;
+        public ActionResult Index(int? Page, bool? Desc, string type, string q) {
             int page = 0;
-            if (Page != null)
+            long numResults;
+            if (Page.HasValue && Page.Value>=0)
             {
-                page = (int)Page;
+                page = Page.Value;
             }
             IList<Soul> Souls = null;
-            Souls = SoulRepository.GetAll(20, page, out numResults, SoulRepository.CreateOrder(OrderBy,Desc==true));
-            PaginationData pd = new ThreeWayPaginationData(page, 20, numResults);
+            if (q != null)
+            {
+                var eb = SoulRepository.CreateExpressionBuilder();
+                IExpression exp = eb.Like("name", "%" + q + "%", true);
+                Souls = SoulRepository.FindByExpression(exp, 54, page, out numResults, SoulRepository.CreateOrder("name", Desc == true));
+            }
+            else
+            {
+                Souls = SoulRepository.GetAll(54, page, out numResults, SoulRepository.CreateOrder("name", Desc == true));
+            }
+            PaginationData pd = new ThreeWayPaginationData(page, 54, numResults);
             ViewData["Pagination"] = pd;
-            return View(Souls);
+            if (type == "json")
+            {
+                return new JsonNetResult(Souls);
+            }
+            else
+            {
+                return View(Souls);
+            }
         }
 
-        public ActionResult Show(int id) {
-            Soul Soul = SoulRepository.Get(id);
-            return View(Soul);
+        public IList<Post> GetPostsForSoul(int id, int Page, int PageSize)
+        {
+            var eb = PostRepository.CreateExpressionBuilder();
+            return PostRepository.FindByQuery("from Post p where p.user.Id = " + id + " order by lastedit desc",PageSize,Page);
+        }
+
+        public ActionResult Show(int id, int? Page, string type) {
+            Soul s = SoulRepository.Get(id);
+            if (s == null)
+            {
+                throw new HttpException(404, "HTTP/1.1 404 Not Found");
+            }
+            int page = 0;
+            if (Page.HasValue && Page.Value>0) {
+                page = Page.Value;
+            }
+            IList<Post> p = GetPostsForSoul(id, page,54);
+            ViewData["page"] = page + 1;
+            ViewData["soul"] = s;
+            if (type == "json")
+            {
+                return new JsonNetResult(new { soul = s, data = p });
+            }
+            else
+            {
+                return View(p);
+            }
         }
 
         private readonly INHibernateQueryRepository<Soul> SoulRepository;
+        private readonly INHibernateQueryRepository<Post> PostRepository;
     }
 }
 

@@ -195,6 +195,24 @@ namespace CodeChirp.ApplicationServices
                 }
                 userRepository.DbContext.CommitTransaction();
 
+                /*
+                QuestionsResult result = target.GetResult();
+                while ((result.page < 20) && (result.questions.Length > 0))
+                {
+                    badgeRepository.DbContext.BeginTransaction();
+                    System.Console.WriteLine("Loading page {0}", result.page);
+                    foreach (Questions q in result.questions)
+                    {
+                        System.Console.WriteLine("Importing Question {0}", q.title);
+                        ImportQuestion(q);
+                    }
+                    target.Parameters.page++;
+                    result = target.GetResult();
+                    badgeRepository.DbContext.CommitChanges(true);
+                    badgeRepository.DbContext.CommitTransaction();
+                }
+                */
+
                 System.Console.WriteLine("{0} api calls left: {1}", Enum.GetName(typeof(Site), site), Api.RemainingRequests);
             }
         }

@@ -1,3 +1,4 @@
+@namespace=CodeChirp.Core
 !!! XML
 !!! strict
 %html( xmlns="http://www.w3.org/1999/xhtml" )
@@ -10,21 +11,34 @@
     %script( type="text/javascript" src="/Public/Scripts/MicrosoftMvcValidation.js" )
     %link( href="/Public/Content/screen.css" media="screen,projection" rel="stylesheet" type="text/css" )
     %link( href="/Public/Content/print.css" media="print" rel="stylesheet" type="text/css" )
-    /[if le IE 7]
+    /[if lt IE 7]
       %link( href="/Public/Content/ie.css" media="screen,projection" rel="stylesheet" type="text/css" )
     @contentplaceholder=Title
       %title CodeChirp
   %body
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-9404141-6']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
     #mainContent
       #topContainer
-        %h1
-          CodeChirp
+        %a( href='/' )
+          %h1
+            CodeChirp
         %h2
           CodeChirp
       #columnsContainer
         #leftColumn
           #leftTop
           #leftMain
+            @contentplaceholder=Header
+              /
+            _ MainMenu
             _
         #rightColumn
           .block
@@ -33,6 +47,55 @@
               _ LogOnUserControl
           @contentplaceholder=MoreBlocks
             /
+          .block
+            .blockTop
+            .blockMain
+              %h2 Links
+              %h3 The SO-quadrilogy
+              %ul
+                %li
+                  %a( href="http://stackoverflow.com" ) 
+                    %img( src="#{Site.StackOverflow.GetIcon()}" )/
+                    Stack Overflow
+                %li                  
+                  %a( href="http://serverfault.com" )
+                    %img( src="#{Site.ServerFault.GetIcon()}" )/                  
+                    Server Fault
+                %li              
+                  %a( href="http://superuser.com" )
+                    %img( src="#{Site.SuperUser.GetIcon()}" )/                  
+                    Super User
+                %li              
+                  %a( href="http://meta.stackoverflow.com" )
+                    %img( src="#{Site.MetaStackOverflow.GetIcon()}" )/                  
+                    Meta Stack Overflow
+              %h3 CodeChirp
+              %ul
+                %li
+                  %a( href="" ) CodeChirp at StackApps
+                %li
+                  %a( href="http://github.com/sztupy/CodeChirp" ) CodeChirp source code
+              %h3 Running under
+              %ul
+                %li
+                  %a( href="http://salientstackapps.codeplex.com/" ) Salient.StackApps
+                %li
+                  %a( href="http://shaml.sztupy.hu/" ) S#aml Architecture
+                %li
+                  %a( href="http://go-mono.com" ) Mono
+                %li
+                  %a( href="http://www.ubuntu.com" ) Ubuntu
+                %li
+                  %a( href="http://hungarystartshere.com/?useLang=en" ) Hungary           
+          .block
+            .blockTop
+            .blockMain
+              %h2 About
+              %p
+                CodeChirp is a common gateway to your everyday IT related chirps.
+                The site aggregates all fresh content from the Stack Exchange sites,
+                and lets you follow them by name, tag, or category to fill your mind with
+                chirps from all over the world.
           #endMain
     #footer
       _ Footer

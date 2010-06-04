@@ -1,16 +1,19 @@
-@type=Soul
-%div
-  %h2 Soul Details
-  %ul
-  %li
-    %label( for="Soul_name" ) name:
-      %span( id="Soul_name" )
-        = ViewData.Model.name
-  %li
-    %label( for="Soul_gravatar" ) gravatar:
-      %span( id="Soul_gravatar" )
-        = ViewData.Model.gravatar
-  %li
-    %label( for="Soul_point" ) point:
-      %span( id="Soul_point" )
-        = ViewData.Model.point
+@namespace=CodeChirp.Core
+@namespace=Shaml.Web.HtmlHelpers
+@type=IList<Post>
+@content=Header
+  %h2
+    User page
+@content=Main
+  %ul.postlist
+    %li.post
+      _ MiniSoul( model='ViewData["soul"]' )
+  %h2 Posts for user
+  %ul.postlist
+    - foreach (Post p in Model)
+      %li.post
+        _ MiniPost( model="p" )
+  %div= Html.ActionLink("Next page","Index",new { page = ViewData["page"] })
+@content=MoreBlocks
+  _ AddToChannels( model='((Soul)ViewData["soul"]).Id.ToString()' )
+  _ UserMatrix( model="Model" )

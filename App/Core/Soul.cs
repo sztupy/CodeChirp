@@ -5,10 +5,11 @@ using Shaml.Membership.Core;
 using System;
 using Iesi.Collections;
 using Iesi.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CodeChirp.Core
 {
-    
+    [JsonObject(MemberSerialization.OptOut)]
     public class Soul : Entity
     {
         public Soul() {
@@ -31,5 +32,11 @@ namespace CodeChirp.Core
         public virtual long siteid { get; set; }
 
         public virtual ISet<Badge> badges { get; protected set; }
+
+        public virtual string ToUrl()
+        {
+            string s = sitename.ToUrl();
+            return s + "/users/" + siteid;
+        }
     }
 }

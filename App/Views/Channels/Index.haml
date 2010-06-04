@@ -1,26 +1,25 @@
 @namespace=CodeChirp.Core
 @namespace=CodeChirp.Controllers
 @namespace=Shaml.Web.HtmlHelpers
-@type=List<Badge>
+@type=List<Channel>
 @content=Header
   %h2
-    List of tags
+    List of channels
 @content=Main
   %ul.postlist
-    - foreach (Badge b in Model)
+    - foreach (Channel c in Model)
       %li.post
         .tags
-          %a( href='#{Url.Action("Show", "Badges", new { id = b.Id \})}' )
+          %a( href='#{Url.Action("Show", "Channels", new { id = c.Id \})}' )
             %kbd
-              %img( src="#{b.sitename.GetIcon()}" )/
-              = b.name
-              (#{b.rank})
+              = c.name
+              (by #{c.owner.Comment})
   %div= Html.RenderPagination(ViewData["Pagination"] as PaginationData)
 @content=MoreBlocks
   .block
     .blockTop
     .blockMain
-      - using(Html.BeginForm("Index","Badges",FormMethod.Get))
-        %p Search for tags:
+      - using(Html.BeginForm("Index","Channels",FormMethod.Get))
+        %p Search for channels:
           = Html.TextBox("q",ViewContext.HttpContext.Request.Params.Get("q"))  
-      
+

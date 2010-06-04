@@ -1,8 +1,24 @@
-@type=Tag
-%div
-  %h2 Tag Details
-  %ul
-  %li
-    %label( for="Tag_name" ) name:
-      %span( id="Tag_name" )
-        = ViewData.Model.name
+@namespace=CodeChirp.Core
+@namespace=Shaml.Web.HtmlHelpers
+@type=IList<Post>
+@content=Header
+  %h2
+    Tag page
+@content=Main
+  %ul.postlist
+    %li.post
+      .tags
+        - var t = ViewData["tag"] as Tag
+        Tag name: 
+        %a( href='#{Url.Action("Show", "Tags", new { id = t.Id \})}' )
+          %kbd
+            %img( src="#{t.site.GetIcon()}" )/
+            = t.name
+  %h2 Posts for tag
+  %ul.postlist
+    - foreach (Post p in Model)
+      %li.post
+        _ MiniPost( model="p" )
+  %div= Html.ActionLink("Next page","Index",new { page = ViewData["page"] })
+@content=MoreBlocks
+  _ UserMatrix( model="Model" )

@@ -6,7 +6,7 @@
   %div.user
     - if (Model.user != null)
       %img.gravatar( src="http://www.gravatar.com/avatar/#{Model.user.gravatar}?s=32&d=identicon&r=PG" )/
-      = Html.ActionLink(Model.user.name, "Show", "Souls", new { id = Model.user.Id }, new object { } )
+      = Html.ActionLink(Model.user.name,"Show","Souls",new { id = Model.user.Id }, new object { })
       %strong= Model.user.point
     - else
       Unknown user
@@ -16,15 +16,9 @@
       %a( href='#{Url.Action("Show", "Tags", new { id = t.Id \})}' )
         %kbd
           = t.name
-  %div.summary
-    = Model.summary
-    - if ("<p>"+Model.summary+"</p>" != Model.body)
-      %a( href='#{Url.Action("Show", "Posts", new { id = Model.Id \})}' id="Link#{Model.Id}" ) more...
-      :javascript
-        $('#Link#{Model.Id}').click(function(){$(this).append('<img src="/Public/Content/Images/indicator.gif" />');$.ajax({url:'#{Url.Action("Show","Posts",new{id = Model.Id,type="html"\})}',success:function(data){$('#Post#{Model.Id}').html(data)}});return false;})    
+  %div.contents
+    = Model.body
   %div.links
     %a( href="#{Model.ToUrl()}" target="newwindow" )
       Read at
       %img( src="#{Model.sitename.GetIcon()}" )/
-        
-      

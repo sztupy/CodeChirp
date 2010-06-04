@@ -22,7 +22,7 @@ namespace Tests.Blog.Web.Controllers
         [SetUp]
         public void SetUp() {
             ServiceLocatorInitializer.Init();
-            controller = new SoulsController(CreateMockSoulRepository());
+            controller = new SoulsController(CreateMockSoulRepository(),null);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Tests.Blog.Web.Controllers
         /// </summary>
         [Test]
         public void CanListSouls() {
-            ViewResult result = controller.Index(null,null,null).AssertViewRendered();
+            ViewResult result = controller.Index(null,null,null,null).AssertViewRendered();
 
             result.ViewData.Model.ShouldNotBeNull();
             (result.ViewData.Model as List<Soul>).Count.ShouldEqual(0);
@@ -39,7 +39,7 @@ namespace Tests.Blog.Web.Controllers
 
         [Test]
         public void CanShowSoul() {
-            ViewResult result = controller.Show(1).AssertViewRendered();
+            ViewResult result = controller.Show(1,null,null).AssertViewRendered();
 
 			result.ViewData.ShouldNotBeNull();
 			

@@ -1,0 +1,10 @@
+@namespace=CodeChirp.Core
+@type=List<Post>
+
+.block
+  .blockTop
+  .blockMain
+    %h3 User matrix
+    - foreach (Post p in Model)
+      - if (p.user != null)
+        %img( src="http://www.gravatar.com/avatar/#{p.user.gravatar}?s=32&amp;d=identicon&amp;r=PG" )/

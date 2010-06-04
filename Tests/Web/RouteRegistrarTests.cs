@@ -23,7 +23,6 @@ namespace Tests.CodeChirp
         {
             "~/".Route().ShouldMapTo<HomeController>(x => x.Index(null));
             "~/OpenId".Route().ShouldMapTo<OpenIdController>(x => x.Index());
-            "~/Account/LogOn".Route().ShouldMapTo<AccountController>(x => x.LogOn());
             "~/Account/LogOff".Route().ShouldMapTo<AccountController>(x => x.LogOff());
             "~/MembershipAdministration".Route().ShouldMapTo<MembershipAdministrationController>(x => x.Index(null,null));
         }
