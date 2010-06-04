@@ -30,7 +30,7 @@ namespace CodeChirp.Controllers
                 p = page.Value;
             }
 			Response.AppendHeader("X-XRDS-Location", new Uri(Request.Url, Response.ApplyAppPathModifier("~/OpenId/XRDS")).AbsoluteUri);
-            IList<Post> post = postRepository.GetAll(54, p, postRepository.CreateOrder("lastedit", true));
+            IList<Post> post = postRepository.FindByQuery("from Post p left join fetch p.tags left join fetch p.owner order by lastedit desc",54,p);
             ViewData["page"] = p+1;
             return View(post);
         }

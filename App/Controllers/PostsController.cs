@@ -37,8 +37,7 @@ namespace CodeChirp.Controllers
             {
                 page = (int)Page;
             }
-            IList<Post> Posts = null;
-            Posts = PostRepository.GetAll(54, page, out numResults, PostRepository.CreateOrder("lastactivity",Desc==true));
+            IList<Post> Posts = PostRepository.FindByQuery("from Post p left join fetch p.tags left join fetch p.owner order by lastactivity desc", 54, page, out numResults);
             PaginationData pd = new ThreeWayPaginationData(page, 54, numResults);
             ViewData["Pagination"] = pd;
             if (type == "json")

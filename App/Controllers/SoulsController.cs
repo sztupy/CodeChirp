@@ -42,13 +42,11 @@ namespace CodeChirp.Controllers
             IList<Soul> Souls = null;
             if (q != null)
             {
-                var eb = SoulRepository.CreateExpressionBuilder();
-                IExpression exp = eb.Like("name", "%" + q + "%", true);
-                Souls = SoulRepository.FindByExpression(exp, 54, page, out numResults, SoulRepository.CreateOrder("name", Desc == true));
+                Souls = SoulRepository.FindByQuery("from Soul s left join fetch s.badges where name like ? order by name asc", 54, page, out numResults,"%"+q+"%");
             }
             else
             {
-                Souls = SoulRepository.GetAll(54, page, out numResults, SoulRepository.CreateOrder("name", Desc == true));
+                Souls = SoulRepository.FindByQuery("from Soul s left join fetch s.badges order by name asc", 54, page, out numResults);
             }
             PaginationData pd = new ThreeWayPaginationData(page, 54, numResults);
             ViewData["Pagination"] = pd;

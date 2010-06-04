@@ -15,6 +15,7 @@ namespace CodeChirp.Data.Mapping
        public void Override(AutoMapping<Post> mapping)
        {
            mapping.Map(x => x.body).CustomType("StringClob").CustomSqlType("text");
+           mapping.Map(x => x.summary).CustomType("StringClob").CustomSqlType("text");
            mapping.Map(x => x.sitename).Index("post_site_name_index");
            mapping.Map(x => x.siteid).Index("post_site_id_index");
            mapping.Map(x => x.lastedit).Index("post_lastedit_index");
