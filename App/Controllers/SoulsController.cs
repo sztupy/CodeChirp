@@ -65,7 +65,7 @@ namespace CodeChirp.Controllers
         public IList<Post> GetPostsForSoul(int id, int Page, int PageSize)
         {
             var eb = PostRepository.CreateExpressionBuilder();
-            return PostRepository.FindByQuery("from Post p where p.user.Id = " + id + " order by lastedit desc",PageSize,Page);
+            return PostRepository.FindByQuery("from Post p left join fetch p.user u left join fetch p.tags where u.Id = " + id + " order by lastedit desc",PageSize,Page);
         }
 
         public ActionResult Show(int id, int? Page, string type) {

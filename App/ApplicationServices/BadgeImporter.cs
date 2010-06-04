@@ -72,7 +72,7 @@ namespace CodeChirp.ApplicationServices
             {
                 currentSite = site;
                 Api.DefaultTarget = currentSite.ToName();
-                Api.ApiKey = "";
+                Api.ApiKey = "J9pn2Pf2MEWl5OVgaCjmSw";
 
                 badgeRepository.DbContext.BeginTransaction();
                 List<Badge> badges = GetBadges();

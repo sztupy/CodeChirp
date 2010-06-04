@@ -1,8 +1,10 @@
 ﻿@namespace=CodeChirp.Core
 @namespace=CodeChirp.Controllers
 @type=Channel
-%div
+@content=Header
   %h2 Delete Channel
+@content=Main
+  %p This will permamentally delete your channel
   %p Are you sure?
   - using (Html.BeginForm("DeleteConfirmed","Channels",new { Id = ViewData.Model.Id }))
     = Html.AntiForgeryToken()

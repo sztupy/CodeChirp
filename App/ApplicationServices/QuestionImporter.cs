@@ -176,7 +176,7 @@ namespace CodeChirp.ApplicationServices
             {
                 currentSite = site;
                 Api.DefaultTarget = currentSite.ToName();
-                Api.ApiKey = "";
+                Api.ApiKey = "J9pn2Pf2MEWl5OVgaCjmSw";
 
                 QuestionsRouteMap target = new QuestionsRouteMap();
                 target.Parameters.pagesize = 100;
@@ -195,11 +195,11 @@ namespace CodeChirp.ApplicationServices
                 }
                 userRepository.DbContext.CommitTransaction();
 
-                /*
-                QuestionsResult result = target.GetResult();
+                
+                /*QuestionsResult result = target.GetResult();
                 while ((result.page < 20) && (result.questions.Length > 0))
                 {
-                    badgeRepository.DbContext.BeginTransaction();
+                    userRepository.DbContext.BeginTransaction();
                     System.Console.WriteLine("Loading page {0}", result.page);
                     foreach (Questions q in result.questions)
                     {
@@ -208,10 +208,10 @@ namespace CodeChirp.ApplicationServices
                     }
                     target.Parameters.page++;
                     result = target.GetResult();
-                    badgeRepository.DbContext.CommitChanges(true);
-                    badgeRepository.DbContext.CommitTransaction();
-                }
-                */
+                    userRepository.DbContext.CommitChanges(true);
+                    userRepository.DbContext.CommitTransaction();
+                }*/
+                
 
                 System.Console.WriteLine("{0} api calls left: {1}", Enum.GetName(typeof(Site), site), Api.RemainingRequests);
             }

@@ -65,7 +65,7 @@ namespace CodeChirp.Controllers
 
         public IList<Post> GetPostsForTag(int id, int Page)
         {
-            return PostRepository.FindByQuery("select p from Post p join p.tags t where t.Id = " + id + " order by lastedit desc",54,Page);
+            return PostRepository.FindByQuery("select p from Post p left join fetch p.tags t left join fetch p.user where t.Id = " + id + " order by lastedit desc",54,Page);
         }
 
         public ActionResult Show(int id, int? Page, string type)

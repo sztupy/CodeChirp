@@ -77,13 +77,17 @@ namespace CodeChirp.Controllers
         }
 
         [Authorize]
-        public ActionResult UserChannels(int Id)
+        public ActionResult UserChannels(int? Id)
         {
-            User u = UserRepository.FindOne(new { Username = User.Identity.Name });
-            var eb = ChannelRepository.CreateExpressionBuilder();
-            IList<Channel> Channels = ChannelRepository.FindByExpression(eb.Eq("owner", u), 0, 0, ChannelRepository.CreateOrder("name", false));
-            ViewData["data"] = Id;
-            return View("UserChannels","Empty",Channels);
+          if (Id.HasValue) {
+              User u = UserRepository.FindOne(new { Username = User.Identity.Name });
+              var eb = ChannelRepository.CreateExpressionBuilder();
+              IList<Channel> Channels = ChannelRepository.FindByExpression(eb.Eq("owner", u), 0, 0, ChannelRepository.CreateOrder("name", false));
+              ViewData["data"] = Id.Value;
+              return View("UserChannels","Empty",Channels);
+          } else {
+              return Content("");
+          }
         }
 
         [Authorize]
