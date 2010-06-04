@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq.Expressions;
+using System.Linq;
 
 using NHibernate.Validator.Engine;
 
@@ -47,13 +48,13 @@ namespace CodeChirp.Controllers
             {
                 var eb = BadgeRepository.CreateExpressionBuilder();
                 IExpression exp = eb.Like("name", "%" + q + "%", true);
-                Badges = BadgeRepository.FindByExpression(exp, 54, page, out numResults, BadgeRepository.CreateOrder("name", Desc == true));
+                Badges = BadgeRepository.FindByExpression(exp, 40, page, out numResults, BadgeRepository.CreateOrder("name", Desc == true));
             }
             else
             {
-                Badges = BadgeRepository.GetAll(54, page, out numResults, BadgeRepository.CreateOrder("name", Desc == true));
+                Badges = BadgeRepository.GetAll(40, page, out numResults, BadgeRepository.CreateOrder("name", Desc == true));
             }
-            PaginationData pd = new ThreeWayPaginationData(page, 54, numResults);
+            PaginationData pd = new ThreeWayPaginationData(page, 40, numResults);
             ViewData["Pagination"] = pd;
             if (type == "json")
             {
@@ -67,13 +68,13 @@ namespace CodeChirp.Controllers
 
         public IList<Post> GetPostsForBadge(Badge b, int Page)
         {
-            SoulsController sc = new SoulsController(SoulRepository, PostRepository);
+            SoulsController sc = new SoulsController(SoulRepository, PostRepository,null,null);
             List<Post> p = new List<Post>();
             foreach (var u in b.users)
             {
                 p.AddRange(sc.GetPostsForSoul(u.Id,Page,10));
             }
-            return p;
+            return p.OrderBy(x => x.lastedit).Reverse().ToList();
         }
 
         public ActionResult Show(int id, int? Page, string type)

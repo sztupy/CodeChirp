@@ -31,15 +31,13 @@ namespace CodeChirp.Controllers
         }
 
         public ActionResult Index(int? Page, string type, bool? Desc) {
-            long numResults;
             int page = 0;
             if (Page != null)
             {
                 page = (int)Page;
             }
-            IList<Post> Posts = PostRepository.FindByQuery("from Post p left join fetch p.tags left join fetch p.owner order by lastactivity desc", 54, page, out numResults);
-            PaginationData pd = new ThreeWayPaginationData(page, 54, numResults);
-            ViewData["Pagination"] = pd;
+            IList<Post> Posts = PostRepository.FindByQuery("from Post p left join fetch p.parent left join fetch p.user order by p.lastedit desc", 40, page);
+            ViewData["page"] = page+1;
             if (type == "json")
             {
                 return new JsonNetResult(Posts);

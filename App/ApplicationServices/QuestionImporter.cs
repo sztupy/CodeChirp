@@ -186,17 +186,17 @@ namespace CodeChirp.ApplicationServices
                 target.Parameters.min = -1;
                 target.JsonText = true;
 
-                /*QuestionsResult result = target.GetResult();
+                QuestionsResult result = target.GetResult();
                 userRepository.DbContext.BeginTransaction();
                 foreach (Questions q in result.questions)
                 {
                     System.Console.WriteLine("Importing Question {0}", q.title);
                     ImportQuestion(q);
                 }
-                userRepository.DbContext.CommitTransaction();*/
+                userRepository.DbContext.CommitTransaction();
 
                 
-                QuestionsResult result = target.GetResult();
+                /*QuestionsResult result = target.GetResult();
                 while ((result.page < 10) && (result.questions.Length > 0))
                 {
                     userRepository.DbContext.BeginTransaction();
@@ -210,7 +210,7 @@ namespace CodeChirp.ApplicationServices
                     result = target.GetResult();
                     userRepository.DbContext.CommitChanges(true);
                     userRepository.DbContext.CommitTransaction();
-                }
+                }*/
                 
 
                 System.Console.WriteLine("{0} api calls left: {1}", Enum.GetName(typeof(Site), site), Api.RemainingRequests);

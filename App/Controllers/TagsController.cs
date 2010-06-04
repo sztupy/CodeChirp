@@ -45,13 +45,13 @@ namespace CodeChirp.Controllers
             {
                 var eb = TagRepository.CreateExpressionBuilder();
                 IExpression exp = eb.Like("name", "%" + q + "%", true);
-                Tags = TagRepository.FindByExpression(exp, 54, page, out numResults, TagRepository.CreateOrder("name", Desc == true));
+                Tags = TagRepository.FindByExpression(exp, 40, page, out numResults, TagRepository.CreateOrder("name", Desc == true));
             }
             else
             {
-                Tags = TagRepository.GetAll(54, page, out numResults, TagRepository.CreateOrder("name", Desc == true));
+                Tags = TagRepository.GetAll(40, page, out numResults, TagRepository.CreateOrder("name", Desc == true));
             }
-            PaginationData pd = new ThreeWayPaginationData(page, 54, numResults);
+            PaginationData pd = new ThreeWayPaginationData(page, 40, numResults);
             ViewData["Pagination"] = pd;
             if (type == "json")
             {
@@ -65,7 +65,7 @@ namespace CodeChirp.Controllers
 
         public IList<Post> GetPostsForTag(int id, int Page)
         {
-            return PostRepository.FindByQuery("select p from Post p left join fetch p.tags t left join fetch p.user where t.Id = " + id + " order by lastedit desc",54,Page);
+            return PostRepository.FindByQuery("select p from Post p left join fetch p.user left join fetch p.parent left join p.tags t where t.Id = " + id + " order by p.lastedit desc",40,Page);
         }
 
         public ActionResult Show(int id, int? Page, string type)

@@ -2,6 +2,7 @@ using System;
 using System.Web.Mvc;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using System.Linq.Expressions;
 
 using NHibernate.Validator.Engine;
@@ -49,13 +50,13 @@ namespace CodeChirp.Controllers
             {
                 var eb = ChannelRepository.CreateExpressionBuilder();
                 IExpression exp = eb.Like("name", "%" + q + "%", true);
-                Channels = ChannelRepository.FindByExpression(exp, 54, page, out numResults, ChannelRepository.CreateOrder("name", Desc == true));
+                Channels = ChannelRepository.FindByExpression(exp, 40, page, out numResults, ChannelRepository.CreateOrder("name", Desc == true));
             }
             else
             {
-                Channels = ChannelRepository.GetAll(54, page, out numResults, ChannelRepository.CreateOrder("name", Desc == true));
+                Channels = ChannelRepository.GetAll(40, page, out numResults, ChannelRepository.CreateOrder("name", Desc == true));
             }
-            PaginationData pd = new ThreeWayPaginationData(page, 54, numResults);
+            PaginationData pd = new ThreeWayPaginationData(page, 40, numResults);
             ViewData["Pagination"] = pd;
             if (type == "json")
             {
@@ -109,13 +110,13 @@ namespace CodeChirp.Controllers
 
         public IList<Post> GetPostsForChannel(Channel c, int Page)
         {
-            SoulsController sc = new SoulsController(SoulRepository, PostRepository);
+            SoulsController sc = new SoulsController(SoulRepository, PostRepository, null, null);
             List<Post> p = new List<Post>();
             foreach (var u in c.users)
             {
                 p.AddRange(sc.GetPostsForSoul(u.Id, Page, 10));
             }
-            return p;
+            return p.OrderBy(x => x.lastedit).Reverse().ToList();
         }
 
         public ActionResult Show(int id, int? Page, string type)

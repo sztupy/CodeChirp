@@ -247,13 +247,10 @@
     <None Include="App\Stylesheets\ie.sass" />
     <None Include="App\Stylesheets\print.sass" />
     <None Include="App\Stylesheets\screen.sass" />
-    <None Include="App\Views\Channels\UserChannels.haml">
+    <None Include="App\Views\Shared\_UserChannels.haml">
       <SubType>ASPXCodeBehind</SubType>
     </None>
     <None Include="App\Views\Channels\Manage.haml" />
-    <None Include="App\Views\Shared\_AddToChannels.haml">
-      <SubType>ASPXCodeBehind</SubType>
-    </None>
     <None Include="App\Views\Shared\_MiniSoul.haml">
       <SubType>ASPXCodeBehind</SubType>
     </None>

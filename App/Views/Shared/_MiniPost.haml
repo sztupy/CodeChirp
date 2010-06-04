@@ -11,6 +11,7 @@
     - else
       Unknown user
     = Model.Activity()
+    %strong= Model.lastedit.NaturalString()
   %div.tags
     - foreach (Tag t in Model.tags)
       %a( href='#{Url.Action("Show", "Tags", new { id = t.Id \})}' )
@@ -26,5 +27,3 @@
     %a( href="#{Model.ToUrl()}" target="newwindow" )
       Read at
       %img( src="#{Model.sitename.GetIcon()}" )/
-        
-      

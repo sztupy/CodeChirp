@@ -22,7 +22,7 @@ namespace Tests.Blog.Web.Controllers
         [SetUp]
         public void SetUp() {
             ServiceLocatorInitializer.Init();
-            controller = new SoulsController(CreateMockSoulRepository(),null);
+            controller = new SoulsController(CreateMockSoulRepository(),null, null, null);
         }
 
         /// <summary>

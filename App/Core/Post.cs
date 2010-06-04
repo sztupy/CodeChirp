@@ -7,9 +7,38 @@ using Salient.StackApps.Routes;
 using System.Collections.Generic;
 using Iesi.Collections.Generic;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace CodeChirp.Core
 {
+    public static class DateConverter
+    {
+        public static string NaturalString(this DateTime dt)
+        {
+            TimeSpan ts = DateTime.UtcNow - dt;
+            if (ts.TotalSeconds < 120)
+            {
+                return "just now";
+            }
+            if (ts.TotalMinutes < 90)
+            {
+                return Math.Round(ts.TotalMinutes) + " minutes ago";
+            }
+            if (ts.TotalHours < 24)
+            {
+                return Math.Round(ts.TotalHours) + " hours ago";
+            }
+            if (dt.Year == DateTime.UtcNow.Year)
+            {
+                return dt.ToString("MMM dd \\a\\t HH:mm", CultureInfo.CreateSpecificCulture("en-US"));
+            }
+            else
+            {
+                return dt.ToString("MMM dd \\'yy \\a\\t HH:mm", CultureInfo.CreateSpecificCulture("en-US"));
+            }
+        }
+    }
+
     [JsonObject(MemberSerialization.OptOut)]
     public class Post : Entity
     {  

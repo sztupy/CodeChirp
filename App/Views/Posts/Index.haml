@@ -9,6 +9,6 @@
     - foreach (Post p in Model)
       %li.post
         _ MiniPost( model="p" )
-  %div= Html.RenderPagination(ViewData["Pagination"] as PaginationData)
+  %div= Html.ActionLink("Next page","Index",new { page = ViewData["page"] })
 @content=MoreBlocks
   _ UserMatrix( model="Model" )
