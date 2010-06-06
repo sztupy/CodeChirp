@@ -15,7 +15,7 @@ namespace CodeChirp.Data.Mapping
        public void Override(AutoMapping<Channel> mapping)
        {
            mapping.Map(x => x.name).Index("channel_name_index");
-           mapping.HasManyToMany<Soul>(x => x.users);
+           mapping.HasManyToMany<Soul>(x => x.users).Cache.NonStrictReadWrite();
        }
    }
 }

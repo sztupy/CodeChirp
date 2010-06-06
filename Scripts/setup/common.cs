@@ -10,6 +10,7 @@ LoadAssembly("bin/NHaml.Core.dll");
 LoadAssembly("bin/NHaml.Web.Mvc.dll");
 LoadAssembly("bin/NHibernate.dll");
 LoadAssembly("bin/NHibernate.ByteCode.LinFu.dll");
+LoadAssembly("bin/NHibernate.Caches.SysCache.dll");
 LoadAssembly("bin/NHibernate.Validator.dll");
 LoadAssembly("bin/Npgsql.dll");
 LoadAssembly("bin/Shaml.Core.dll");

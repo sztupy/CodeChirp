@@ -17,6 +17,7 @@ namespace CodeChirp.Data.Mapping
            mapping.Map(x => x.name).Index("soul_name_index");
            mapping.Map(x => x.sitename).Index("soul_site_name_index");
            mapping.Map(x => x.siteid).Index("soul_site_id_index");
+           mapping.HasManyToMany<Badge>(x => x.badges).Cache.NonStrictReadWrite();
        }
    }
 }
