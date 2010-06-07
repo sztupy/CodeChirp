@@ -44,7 +44,7 @@ namespace CodeChirp.ApplicationServices
             post.siteid = q.question_id;
             post.sitename = currentSite;
             post.type = PostType.question;
-            post.user = userimport.Import(userRepository, currentSite, q.owner);
+            post.user = userimport.Import(conn, currentSite, q.owner);
             post.parent = null;
 
             post.tags.Clear();
