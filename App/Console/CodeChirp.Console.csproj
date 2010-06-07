@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CE3802D9-1E17-47AB-ACEF-999F0DD685CA}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{F59B46DA-192D-4F2F-AAFA-88331541DD66}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CodeChirp.ApplicationServices</RootNamespace>
-    <AssemblyName>CodeChirp.ApplicationServices</AssemblyName>
+    <RootNamespace>Console</RootNamespace>
+    <AssemblyName>Console</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -31,40 +31,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetOpenAuth, Version=3.2.0.9171, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libraries\DotNetOpenAuth.dll</HintPath>
+      <HintPath>..\..\libraries\Mono.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Shaml.Core, Version=0.9.3805.24750, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Npgsql, Version=2.0.8.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libraries\Shaml.Core.dll</HintPath>
+      <HintPath>..\..\libraries\Npgsql.dll</HintPath>
     </Reference>
-    <Reference Include="Shaml.Data, Version=0.9.3805.24751, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Salient.StackApps, Version=0.8.0.39454, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libraries\Shaml.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="Shaml.Membership">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libraries\Shaml.Membership.dll</HintPath>
-    </Reference>
-    <Reference Include="Shaml.Web, Version=0.9.3805.24751, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libraries\Shaml.Web.dll</HintPath>
+      <HintPath>..\..\libraries\Salient.StackApps.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Abstractions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libraries\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Routing">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml.Linq">
@@ -77,21 +57,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Config\CommonAssemblyInfo.cs">
-      <Link>Properties\CommonAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="MembershipAdministrationController_Base.cs" />
-    <Compile Include="OpenIDController_Base.cs" />
+    <Compile Include="BadgeImporter.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionImporter.cs" />
+    <Compile Include="UserImporter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\CodeChirp.Core.csproj">
       <Project>{E7B9DBBF-74D5-4A30-B497-13B7C441FABC}</Project>
       <Name>CodeChirp.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Data\CodeChirp.Data.csproj">
-      <Project>{33500762-1B80-4AC3-88AF-029A1043AF71}</Project>
-      <Name>CodeChirp.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

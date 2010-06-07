@@ -18,6 +18,8 @@ namespace CodeChirp.Data.Mapping
            mapping.Cache.ReadOnly();
            mapping.Map(x => x.name).Index("tag_name_index");
            mapping.Map(x => x.site).Index("tag_site_name_index");
+           mapping.Map(x => x.site).UniqueKey("tag_site_unique");
+           mapping.Map(x => x.name).UniqueKey("tag_site_unique");
        }
    }
 }

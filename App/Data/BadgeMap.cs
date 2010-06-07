@@ -21,7 +21,10 @@ namespace CodeChirp.Data.Mapping
             mapping.Map(x => x.siteid).Index("badge_site_id_index");
             mapping.Map(x => x.rank).Index("badge_rank_index");
             mapping.Map(x => x.name).Index("badge_name_index");
-            mapping.HasManyToMany<Soul>(x => x.users).Cache.NonStrictReadWrite();
+            mapping.HasManyToMany<Soul>(x => x.users).Cache.ReadOnly();
+
+            mapping.Map(x => x.siteid).UniqueKey("badge_site_unique");
+            mapping.Map(x => x.sitename).UniqueKey("badge_site_unique");
        }
    }
 }

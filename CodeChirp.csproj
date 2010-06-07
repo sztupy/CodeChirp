@@ -150,7 +150,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="App\Views\Tags\Show.haml">
-      <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="App\Views\Posts\Index.haml">
       <SubType>ASPXCodeBehind</SubType>

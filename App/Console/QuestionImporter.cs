@@ -4,51 +4,37 @@ using System.Linq;
 using System.Text;
 using Salient.StackApps;
 using Salient.StackApps.Routes;
-using Shaml.Core.PersistenceSupport.NHibernate;
 using CodeChirp.Core;
-using Shaml.Data.NHibernate;
 using System.Text.RegularExpressions;
-
-/*
- * CodeChirp is a twitter-like question/comment/answer aggregator for the SO-trilogy where you can follow posts by users, badges or tags. You can also create  your own channel, which other people might follow.
-
-CodeChirp is a web application that periodically harvests information from all registered API sites, and stores them in it's own database. It also hosts an API 
-
-CodeChirp */
+using System.IO;
+using Npgsql;
 
 namespace CodeChirp.ApplicationServices
 {
     public class QuestionImporter
     {
-        INHibernateQueryRepository<Soul> userRepository;
-        INHibernateQueryRepository<Tag> tagRepository;
-        INHibernateQueryRepository<Post> postRepository;
         UserImporter userimport;
         Site currentSite;
+        TextWriter textwriter;
+        NpgsqlConnection conn;
 
-        public QuestionImporter()
+        public QuestionImporter(NpgsqlConnection conn)
         {
-            userRepository = new NHibernateQueryRepository<Soul>();
-            tagRepository = new NHibernateQueryRepository<Tag>();
-            postRepository = new NHibernateQueryRepository<Post>();
+            this.conn = conn;
             userimport = new UserImporter();
+            textwriter = System.Console.Out;
         }
 
-        public QuestionImporter(INHibernateQueryRepository<Soul> rep, INHibernateQueryRepository<Tag> tag, INHibernateQueryRepository<Post> post, UserImporter import)
+        public QuestionImporter(NpgsqlConnection conn, UserImporter import, TextWriter tw)
         {
-            userRepository = rep;
+            this.conn = conn;
             userimport = import;
-            tagRepository = tag;
-            postRepository = post;
+            textwriter = tw;
         }
 
         public void ImportQuestion(Questions q)
         {
-            Post post = postRepository.FindOne(new { type = PostType.question, sitename = currentSite, siteid = q.question_id });
-            if (post == null)
-            {
-                post = new Post();
-            }
+            Post post = new Post();
             post.body = "<p>"+q.title+"</p>"+q.body;
             post.summary = q.title;
             post.community = q.community_owned;
@@ -57,6 +43,10 @@ namespace CodeChirp.ApplicationServices
             post.score = q.score;
             post.siteid = q.question_id;
             post.sitename = currentSite;
+            post.type = PostType.question;
+            post.user = userimport.Import(userRepository, currentSite, q.owner);
+            post.parent = null;
+
             post.tags.Clear();
             foreach (string s in q.tags)
             {
@@ -70,10 +60,6 @@ namespace CodeChirp.ApplicationServices
                 }
                 post.tags.Add(t);
             }
-            post.type = PostType.question;
-            post.user = userimport.Import(userRepository, currentSite, q.owner);
-            post.parent = null;
-            postRepository.SaveOrUpdate(post);
             foreach (Comments c in q.comments)
             {
                 ImportComment(post, c);
@@ -82,7 +68,6 @@ namespace CodeChirp.ApplicationServices
             {
                 ImportAnswer(post, a);
             }
-            postRepository.DbContext.CommitChanges(true);
         }
 
         public void ImportComment(Post parent, Comments c)
@@ -170,7 +155,7 @@ namespace CodeChirp.ApplicationServices
             }
         }
 
-        public void Import()
+        public void Import(int amount)
         {
             foreach (Site site in Enum.GetValues(typeof(Site)))
             {
@@ -186,34 +171,31 @@ namespace CodeChirp.ApplicationServices
                 target.Parameters.min = -1;
                 target.JsonText = true;
 
-                QuestionsResult result = target.GetResult();
-                userRepository.DbContext.BeginTransaction();
-                foreach (Questions q in result.questions)
+                if (amount == 1)
                 {
-                    System.Console.WriteLine("Importing Question {0}", q.title);
-                    ImportQuestion(q);
-                }
-                userRepository.DbContext.CommitTransaction();
-
-                
-                /*QuestionsResult result = target.GetResult();
-                while ((result.page < 10) && (result.questions.Length > 0))
-                {
-                    userRepository.DbContext.BeginTransaction();
-                    System.Console.WriteLine("Loading page {0}", result.page);
+                    QuestionsResult result = target.GetResult();
                     foreach (Questions q in result.questions)
                     {
-                        System.Console.WriteLine("Importing Question {0}", q.title);
+                        textwriter.WriteLine("Importing Question {0}", q.title);
                         ImportQuestion(q);
                     }
-                    target.Parameters.page++;
-                    result = target.GetResult();
-                    userRepository.DbContext.CommitChanges(true);
-                    userRepository.DbContext.CommitTransaction();
-                }*/
-                
-
-                System.Console.WriteLine("{0} api calls left: {1}", Enum.GetName(typeof(Site), site), Api.RemainingRequests);
+                }
+                else
+                {
+                    QuestionsResult result = target.GetResult();
+                    while ((result.page <= amount) && (result.questions.Length > 0))
+                    {
+                        textwriter.WriteLine("Loading page {0}", result.page);
+                        foreach (Questions q in result.questions)
+                        {
+                            textwriter.WriteLine("Importing Question {0}", q.title);
+                            ImportQuestion(q);
+                        }
+                        target.Parameters.page++;
+                        result = target.GetResult();
+                    }
+                }
+                textwriter.WriteLine("{0} api calls left: {1}", Enum.GetName(typeof(Site), site), Api.RemainingRequests);
             }
         }
     }

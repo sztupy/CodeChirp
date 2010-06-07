@@ -14,10 +14,14 @@ namespace CodeChirp.Data.Mapping
    {
        public void Override(AutoMapping<Soul> mapping)
        {
+           mapping.Cache.ReadOnly();
            mapping.Map(x => x.name).Index("soul_name_index");
            mapping.Map(x => x.sitename).Index("soul_site_name_index");
            mapping.Map(x => x.siteid).Index("soul_site_id_index");
-           mapping.HasManyToMany<Badge>(x => x.badges).Cache.NonStrictReadWrite();
+           mapping.HasManyToMany<Badge>(x => x.badges).Cache.ReadOnly();
+
+           mapping.Map(x => x.siteid).UniqueKey("soul_site_unique");
+           mapping.Map(x => x.sitename).UniqueKey("soul_site_unique");
        }
    }
 }
